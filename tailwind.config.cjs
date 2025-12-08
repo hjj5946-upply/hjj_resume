@@ -9,8 +9,10 @@ module.exports = {
     extend: {
       colors: {
         accent: {
-          DEFAULT: "#cc1231",
-          light: "#f03252",
+          DEFAULT: "#de9b2f",
+          light: "#f5ba3b",
+          // DEFAULT: "#cc1231",
+          // light: "#f03252",
         },
       },
     },
