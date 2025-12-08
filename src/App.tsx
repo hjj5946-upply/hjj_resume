@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { SkillChart } from "./components/SkillChart.tsx"; // 파일명이 다르면 맞춰서 수정
+import { SkillChart } from "./components/SkillChart.tsx";
+import LogoImg from "/android-icon-192x192.png";
+
 import {
   FiGithub,
   FiInstagram,
@@ -68,18 +70,23 @@ function App() {
     <div className="min-h-screen bg-white text-slate-900 scroll-smooth transition-colors dark:bg-[#242526] dark:text-slate-50">
       {/* 상단 헤더 */}
       <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur dark:border-slate-700 dark:bg-[#242526]/90">
-        <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-3">
-          {/* 로고 영역 (영어 이름 로고 들어갈 자리) */}
+        <div className="mx-auto flex max-w-3xl items-center justify-between px-4 h-14">
+    
           <div
             onClick={() => window.location.reload()}
-            className="flex items-center gap-2 cursor-pointer select-none"
+            className="flex items-center cursor-pointer select-none"
           >
-            {/* 모노그램 아이콘 */}
-            <div className="flex h-8 w-8 items-center justify-center rounded-full border border-accent/60 text-[11px] font-semibold tracking-[0.18em] text-accent dark:border-accent-light/70 dark:text-accent-light transition-colors duration-300 ease-out">
-              JH
-            </div>
+            <button
+              onClick={() => window.location.reload()}
+              className="flex items-center justify-center rounded-md p-1 hover:opacity-80 transition-opacity"
+            >
+              <img
+                src={LogoImg}
+                alt="Logo"
+                className="max-h-16 w-auto object-contain" 
+              />
+            </button>
 
-            {/* 워드마크 */}
             <div className="flex flex-col leading-tight">
               <span className="text-xs font-semibold tracking-tight text-slate-900 dark:text-slate-50">
                 Hong JeongJun
