@@ -69,7 +69,7 @@ function App() {
   return (
     <div className="min-h-screen bg-white text-slate-900 scroll-smooth transition-colors dark:bg-[#242526] dark:text-slate-50">
       {/* 상단 헤더 */}
-      <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur dark:border-slate-700 dark:bg-[#242526]/90">
+      <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/80 backdrop-blur dark:border-slate-700 dark:bg-[#242526]/90">
         <div className="mx-auto flex max-w-3xl items-center justify-between px-4 h-14">
     
           <div
@@ -88,11 +88,11 @@ function App() {
             </button>
 
             <div className="flex flex-col leading-tight">
-              <span className="text-xs font-semibold tracking-tight text-slate-900 dark:text-slate-50">
+              <span className="text-s font-semibold tracking-tight text-slate-900 dark:text-slate-50">
                 Hong JeongJun
               </span>
-              <span className="text-[10px] text-slate-500 dark:text-slate-400">
-                Software Developer
+              <span className="text-[11px] text-slate-500 dark:text-slate-400">
+                Full-Stack Software Engineer
               </span>
             </div>
           </div>
@@ -134,26 +134,35 @@ function App() {
             </div>
 
             <div className="flex-1">
-              <p className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+              {/* <p className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
                 Portfolio
-              </p>
-              <h1 className="mt-3 text-3xl font-semibold tracking-tight">
-                안녕하세요, 개발자 준입니다.
-              </h1>
-              <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                Python, Kotlin, Java, React를 주 스택으로 사용하는
-                소프트웨어 개발자입니다. 웹, 모바일, 백엔드를
-                넘나들며 제품을 설계하고 구현하는 일을 좋아합니다.
+              </p> */}
+
+              <h2 className="font-inter text-2xl font-semibold tracking-tight">
+                복잡함을 구조로 풀어내는 개발자, 준입니다.
+              </h2>
+
+              <p className="mt-3 text-s leading-relaxed text-slate-600 dark:text-slate-300">
+                웹·모바일·백엔드를 넘나들며 문제의 본질을 찾고,
+                서비스가 단순하게 작동하도록 만드는 데 집중합니다.
               </p>
 
-              {/* 주요 링크들 */}
+              <p className="mt-2 text-s leading-relaxed text-slate-600 dark:text-slate-300">
+                기술보다 흐름과 사용자 경험을 먼저 고민하며,
+                제품이 실제로 가치로 이어지는 구조를 설계합니다.
+              </p>
+
               <div className="mt-4 flex flex-wrap gap-3 text-sm">
-                <a
-                  href="#projects"
-                  className="inline-flex items-center rounded-full border border-accent/70 bg-accent/90 px-4 py-1.5 text-sm font-medium text-white transition-colors duration-300 ease-out hover:bg-accent dark:border-accent-light/70 dark:bg-accent-light/90 dark:hover:bg-accent-light"
-                >
-                  프로젝트 보기
-                </a>
+              <a
+                href="#projects"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToProjects();
+                }}
+                className="inline-flex items-center rounded-full border border-accent/70 bg-accent/90 px-4 py-1.5 text-sm font-medium text-white transition-colors duration-300 ease-out hover:bg-accent dark:border-accent-light/70 dark:bg-accent-light/90 dark:hover:bg-accent-light"
+              >
+                프로젝트 보기
+              </a>
               </div>
             </div>
           </div>
@@ -163,10 +172,10 @@ function App() {
         <section id="summary" className="mb-8">
           <SectionTitle>Summary</SectionTitle>
           <p className="mt-3 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
-            여기에는 경력 요약, 관심 도메인, 강점 등을 3~4문장
-            정도로 정리하면 좋습니다. 예를 들어 “교육/EdTech
-            도메인에 관심이 많고, 작은 팀에서 빠르게 제품을
-            만들어 사용자 반응을 보는 것을 좋아한다” 같은 내용.
+            복잡한 흐름을 단순한 구조로 정리하고, 실제로 작동하는 제품으로 연결하는 과정에 집중합니다.
+            웹·모바일·백엔드를 넘나들며 필요한 것을 빠르게 실험하고 구현합니다.
+            작은 디테일과 인터랙션이 만드는 사용자 경험을 중요하게 생각하며,
+            더 나은 사용성을 향해 지속적으로 개선합니다.
           </p>
         </section>
 
@@ -178,27 +187,49 @@ function App() {
           <SectionTitle>Skills</SectionTitle>
 
           <div className="mt-4 space-y-5 text-sm">
-            {/* 위: 텍스트/태그로 나열 */}
-            <div className="space-y-4">
+            <div className="mt-4 space-y-4 text-sm">
               <SkillRow
-                label="Languages"
-                items={["Python", "Kotlin", "Java", "TypeScript/JavaScript"]}
+                label="Backend / API"
+                items={[
+                  "Java (Spring Boot)",
+                  "Python (FastAPI)",
+                  "C# (ASP.NET)",
+                  "RabbitMQ",
+                  "Kafka",
+                ]}
               />
               <SkillRow
-                label="Backend"
-                items={["FastAPI", "PostgreSQL", "Redis"]}
-              />
-              <SkillRow
-                label="Frontend"
-                items={["React", "Vite", "Tailwind CSS"]}
+                label="Frontend / UI"
+                items={[
+                  "React",
+                  "TypeScript",
+                  "Vite",
+                  "Tailwind CSS",
+                  "GSAP",
+                ]}
               />
               <SkillRow
                 label="Mobile"
                 items={["Android (Kotlin, Jetpack Compose)"]}
               />
               <SkillRow
-                label="Tools"
-                items={["Git/GitHub", "Docker", "Cursor, VSCode"]}
+                label="Infra / DevOps"
+                items={[
+                  "AWS (EC2, ECS, RDS)",
+                  "Docker",
+                  "Jenkins",
+                  "CI/CD",
+                ]}
+              />
+              <SkillRow
+                label="Data / Storage"
+                items={[
+                  "PostgreSQL",
+                  "MySQL",
+                  "MSSQL",
+                  "MariaDB",
+                  "Redis",
+                ]}
               />
             </div>
 
@@ -225,7 +256,7 @@ function App() {
                   Mobile
                 </span>
                 <span className="rounded-full border border-slate-200 px-2 py-0.5 dark:border-slate-500">
-                  Infra / Tools
+                  Infra / DevOps
                 </span>
               </div>
 
@@ -245,8 +276,7 @@ function App() {
           <SectionTitle>Experience</SectionTitle>
 
           <p className="mt-3 text-sm text-slate-700 dark:text-slate-300">
-            회사명은 별도로 공개하지 않고, 최근 몇 년간 수행한 역할과
-            책임 중심으로 정리했습니다.
+            다년간 수행한 역할과 책임 중심으로 정리했습니다.
           </p>
 
           <div className="mt-4 space-y-5">
@@ -304,8 +334,7 @@ function App() {
             협업 제안, 문의, 기타 연락은 아래 채널로 부탁드립니다.
           </p>
           <div className="mt-3 space-y-1 text-sm">
-            <p>Email: your@email.com</p>
-            <p>GitHub: github.com/your-github</p>
+            <p>Email: hjj5946@gmail.com</p>
           </div>
         </section>
       </main>
@@ -336,8 +365,8 @@ function NavLink({ href, label }: NavLinkProps) {
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
     <div className="mb-1 flex items-center gap-2">
-      <span className="h-[4px] w-4 rounded-full bg-accent/80 dark:bg-accent-light/80" />
-      <h2 className="text-sm font-semibold tracking-tight text-slate-900 dark:text-slate-50">
+      <span className="h-[4px] w-4 rounded-full bg-accent/80" />
+      <h2 className="font-inter text-sm font-semibold tracking-tight text-slate-900 dark:text-slate-50">
         {children}
       </h2>
     </div>
@@ -399,7 +428,7 @@ type ProjectCardProps = {
 function ProjectCard({ name, description, techs, link }: ProjectCardProps) {
   return (
     <article className="flex h-full flex-col rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm shadow-sm dark:border-slate-600 dark:bg-[#383a3d]">
-      <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-50">
+      <h3 className="font-inter text-sm font-semibold text-slate-900 dark:text-slate-50">
         {name}
       </h3>
       <p className="mt-2 flex-1 text-slate-700 dark:text-slate-200">
@@ -458,7 +487,7 @@ function Footer() {
       <div className="mb-3 flex justify-center gap-6 text-2xl">
         {/* GitHub */}
         <a
-          href="https://github.com/your-github-id"
+          href="https://github.com/hjj5946-upply"
           target="_blank"
           className="transition-colors duration-300 ease-out hover:text-accent dark:hover:text-accent-light"
         >
@@ -467,7 +496,7 @@ function Footer() {
 
         {/* Instagram */}
         <a
-          href="https://instagram.com/your-instagram-id"
+          href="https://www.instagram.com/h_j_jjjjjjjjjj/"
           target="_blank"
           className="transition-colors duration-300 ease-out hover:text-accent dark:hover:text-accent-light"
         >
@@ -485,7 +514,7 @@ function Footer() {
 
         {/* Email */}
         <a
-          href="mailto:your@email.com"
+          href="mailto:hjj5946@gmail.com"
           className="transition-colors duration-300 ease-out hover:text-accent dark:hover:text-accent"
         >
           <FiMail />
@@ -498,5 +527,19 @@ function Footer() {
 
   );
 }
+
+const scrollToProjects = () => {
+  const el = document.getElementById("projects");
+  if (!el) return;
+
+  const headerOffset = 72; // 대략 h-14 + 여유
+  const rect = el.getBoundingClientRect();
+  const offsetTop = rect.top + window.scrollY - headerOffset;
+
+  window.scrollTo({
+    top: offsetTop,
+    behavior: "smooth",
+  });
+};
 
 export default App;

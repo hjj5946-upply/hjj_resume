@@ -15,6 +15,11 @@ module.exports = {
           // light: "#f03252",
         },
       },
+      fontFamily: {
+        sans: ["Pretendard", "Inter", "ui-sans-serif", "system-ui"],
+        inter: ["Inter", "ui-sans-serif", "system-ui"],
+        pre: ["Pretendard", "ui-sans-serif", "system-ui"],
+      },
     },
   },
   plugins: [],
