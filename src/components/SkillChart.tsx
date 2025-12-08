@@ -41,7 +41,7 @@ import {
                 fontSize: 11,
                 backgroundColor: "#F9FAFB", // 거의 흰색
                 borderColor: "#E5E7EB",     // 연한 회색 테두리
-                color: "#0F172A",           // 진한 글자색
+                color: "#0F172A",           // 진한 글자 색
               }}
               labelStyle={{
                 color: "#6B7280",           // 라벨(카테고리명) 색
