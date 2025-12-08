@@ -127,9 +127,9 @@ function App() {
       <main className="mx-auto max-w-3xl px-4 pb-16 pt-8">
         {/* Hero / 이름 + 한줄소개 + 이미지 영역 */}
         <section className="mb-8 border-b border-slate-200 pb-6 dark:border-slate-700">
-          <div className="flex items-start gap-6">
+          <div className="flex flex-col items-center gap-6 md:flex-row md:items-start">
             {/* 프로필 이미지 틀 */}
-            <div className="h-32 w-32 flex-shrink-0 rounded-xl border border-slate-300 bg-slate-100 text-xs text-slate-500 dark:border-slate-600 dark:bg-[#383a3d] dark:text-slate-400 flex items-center justify-center">
+            <div className="w-40 aspect-square flex-shrink-0 rounded-xl border border-slate-300 bg-slate-100 text-xs text-slate-500 dark:border-slate-600 dark:bg-[#383a3d] dark:text-slate-400 flex items-center justify-center md:w-[25%]">
               Image Here
             </div>
 
@@ -146,7 +146,7 @@ function App() {
                 웹·모바일·백엔드를 넘나들며 문제의 본질을 찾고,
                 서비스가 단순하게 작동하도록 만드는 데 집중합니다.
               </p>
-
+              flex items-start gap-6
               <p className="mt-2 text-s leading-relaxed text-slate-600 dark:text-slate-300">
                 기술보다 흐름과 사용자 경험을 먼저 고민하며,
                 제품이 실제로 가치로 이어지는 구조를 설계합니다.
