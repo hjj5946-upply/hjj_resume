@@ -5,7 +5,7 @@ import {
     YAxis,
     Tooltip,
     ResponsiveContainer,
-    CartesianGrid,
+    // CartesianGrid,
   } from "recharts";
   
   const data = [
@@ -27,7 +27,7 @@ import {
             layout="vertical"
             margin={{ top: 10, right: 10, left: 0, bottom: 5 }}
           >
-            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+            {/* <CartesianGrid strokeDasharray="3 3" vertical={false} /> */}
             <XAxis type="number" domain={[0, 100]} hide />
             <YAxis
               type="category"
@@ -36,8 +36,18 @@ import {
               tick={{ fontSize: 11, fill: "currentColor" }}
             />
             <Tooltip
+              cursor={{ fill: "rgba(148, 163, 184, 0.15)" }} // 막대 hover 영역 살짝 강조 (선택)
               contentStyle={{
                 fontSize: 11,
+                backgroundColor: "#F9FAFB", // 거의 흰색
+                borderColor: "#E5E7EB",     // 연한 회색 테두리
+                color: "#0F172A",           // 진한 글자색
+              }}
+              labelStyle={{
+                color: "#6B7280",           // 라벨(카테고리명) 색
+              }}
+              itemStyle={{
+                color: "#0F172A",           // 값 텍스트 색
               }}
             />
             <Bar
