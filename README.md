@@ -1,73 +1,44 @@
-# React + TypeScript + Vite
+# Developer Portfolio — Hong JeongJun
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+본 프로젝트는 개발자 **홍정준(Hong JeongJun) 의 기술 역량과 프로젝트 경험을 소개하기 위한 개인 포트폴리오 사이트입니다.  
+가독성과 접근성을 우선으로 한 단일 페이지 구조로 설계되었으며, 반응형 UI와 다크 모드를 지원합니다.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React, Vite, TypeScript 기반의 경량 구조
+- TailwindCSS를 활용한 모던 UI 디자인
+- Recharts 기반의 Skill Chart 시각화
+- Light/Dark 모드 지원 및 상태 저장
+- UX 향상을 위한 Scroll-to-Top, 섹션별 포커스 디자인
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**Frontend**  
+- React  
+- TypeScript  
+- Vite  
+- TailwindCSS  
 
-## Expanding the ESLint configuration
+**Visualization**  
+- Recharts  
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**Deployment**  
+- GitHub Pages  
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Features
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 다크 모드 지원
+- 시스템 테마 감지 후 자동 적용
+- 사용자가 직접 토글 가능  
+- 포인트 컬러(accent)는 다크 모드에서 시인성을 높여 별도 적용
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Skill Visualization
+- Backend / Frontend / Mobile / DevOps 등 기술 비중을 시각적인 Bar Chart로 표시
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 모듈화된 컴포넌트 구조
+- App.tsx 기반의 명확한 상단 → 하단 흐름  
+- SkillChart, ExperienceItem, ProjectCard 등 독립 컴포넌트 구성
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Project Structure
+
