@@ -8,10 +8,10 @@ import {
   } from "recharts";
   
   const data = [
-    { name: "Backend", value: 95 },
-    { name: "Frontend", value: 75 },
-    { name: "Mobile", value: 50 },
-    { name: "Infra / DevOps", value: 70 },
+    { name: "Backend", value: 97 },
+    { name: "Frontend", value: 83 },
+    { name: "Mobile", value: 52 },
+    { name: "Infra / DevOps", value: 72 },
   ];
   
   export function SkillChart() {

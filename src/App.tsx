@@ -13,10 +13,79 @@ import {
 import { SiNotion } from "react-icons/si";
 
 type Theme = "light" | "dark";
+type View = "home" | "projects";
+
+const PROJECTS = [
+  {
+    id: "jgamebox",
+    name: "J GameBox",
+    description:
+      "웹 기반 미니 게임 포털. 주사위, 룰렛, 사다리 등 가벼운 게임을 빠르게 즐길 수 있는 PWA 스타일 서비스.",
+    techs: ["React", "TypeScript", "Vite", "Tailwind", "Planck.js", "SaaS", "GitHub"],
+    link: "https://jun-gamebox.com",
+  },
+  {
+    id: "pickstudy",
+    name: "PickStudy",
+    description:
+      "학원·학생·학부모를 연결하는 통합 관리 서비스. 학원용 앱, 학부모용 앱, 관리 웹을 포함한 풀스택 프로젝트.",
+    techs: ["Kotlin", "Jetpack Compose", "FastAPI", "PostgreSQL", "Redis", "Kafka", "Jenkins"],
+    link: "https://pick-study.edu",
+  },
+  {
+    id: "toel",
+    name: "Btorate",
+    description:
+      "해외 배송·구매대행·결제/정산·WMS/WCS/SCM를 통합한 B2B 웹 포털. 운영 실무를 위한 관리 콘솔 및 대시보드 구축.",
+    techs: ["Java", "Spring Boot", "MySQL", "Redis", "RabbitMQ", "AWS"],
+    link: undefined, // 외부에서 볼 수 없으면 undefined 그대로 두면 됨
+  },
+  {
+    id: "wms",
+    name: "WMS System",
+    description:
+      "개인 지출 패턴을 태그와 그래프로 시각화하는 웹 서비스. 카테고리별 분석과 정기 지출 관리 기능 제공.",
+    techs: ["React", "TypeScript", "Node.js", "PostgreSQL"],
+    link: undefined,
+  },
+  {
+    id: "wcs",
+    name: "PAS/DAS",
+    description:
+      "개인 지출 패턴을 태그와 그래프로 시각화하는 웹 서비스. 카테고리별 분석과 정기 지출 관리 기능 제공.",
+    techs: ["React", "TypeScript", "Node.js", "PostgreSQL"],
+    link: undefined,
+  },
+  {
+    id: "account",
+    name: "씀씀이 기록",
+    description:
+      "개인 지출 패턴을 태그와 그래프로 시각화하는 웹 서비스. 카테고리별 분석과 정기 지출 관리 기능 제공.",
+    techs: ["React", "TypeScript", "Node.js", "PostgreSQL"],
+    link: "https://hjj5946-upply.github.io/actbook/lock",
+  },
+  {
+    id: "covid19",
+    name: "열화상 데이터",
+    description:
+      "개인 지출 패턴을 태그와 그래프로 시각화하는 웹 서비스. 카테고리별 분석과 정기 지출 관리 기능 제공.",
+    techs: ["React", "TypeScript", "Node.js", "PostgreSQL"],
+    link: undefined,
+  },
+  {
+    id: "elfin",
+    name: "엘핀 쇼핑몰",
+    description:
+      "개인 지출 패턴을 태그와 그래프로 시각화하는 웹 서비스. 카테고리별 분석과 정기 지출 관리 기능 제공.",
+    techs: ["ReactJS", "Fiber", "SaaS", "supabase", "GitHub"],
+    link: undefined,
+  },
+];
 
 function App() {
   const [theme, setTheme] = useState<Theme>("light");
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [view, setView] = useState<View>("home");
 
   // 초기 테마 로드
   useEffect(() => {
@@ -52,7 +121,7 @@ function App() {
     if (typeof window === "undefined") return;
 
     const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 240);
+      setShowScrollTop(window.scrollY > 740);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -65,7 +134,7 @@ function App() {
 
   const scrollToTop = () =>
     window.scrollTo({ top: 0, behavior: "smooth" });
-
+  
   return (
     <div className="min-h-screen bg-white text-slate-900 scroll-smooth transition-colors dark:bg-[#242526] dark:text-slate-50">
       {/* 상단 헤더 */}
@@ -124,220 +193,261 @@ function App() {
       </header>
 
         {/* 메인 컨테이너 */}
-      <main className="mx-auto max-w-3xl px-4 pb-16 pt-8">
-        {/* Hero / 이름 + 한줄소개 + 이미지 영역 */}
-        <section className="mb-8 border-b border-slate-200 pb-6 dark:border-slate-700">
-          <div className="flex flex-col items-center gap-6 md:flex-row md:items-start">
-            {/* 프로필 이미지 틀 */}
-            <div className="w-40 aspect-square flex-shrink-0 rounded-xl border border-slate-300 bg-slate-100 text-xs text-slate-500 dark:border-slate-600 dark:bg-[#383a3d] dark:text-slate-400 flex items-center justify-center md:w-[25%]">
-              Image Here
+      {view === "home" ? (
+        <main className="mx-auto max-w-3xl px-4 pb-16 pt-8">
+          {/* Hero / 이름 + 한줄소개 + 이미지 영역 */}
+          <section className="mb-8 border-b border-slate-200 pb-6 dark:border-slate-700">
+            <div className="flex flex-col items-center gap-6 md:flex-row md:items-start">
+              {/* 프로필 이미지 틀 */}
+              <div className="w-40 aspect-square flex-shrink-0 rounded-xl border border-slate-300 bg-slate-100 text-xs text-slate-500 dark:border-slate-600 dark:bg-[#383a3d] dark:text-slate-400 flex items-center justify-center md:w-[25%]">
+                Image Here
+              </div>
+
+              <div className="flex-1">
+                {/* <p className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+                  Portfolio
+                </p> */}
+
+                <h2 className="font-inter text-2xl font-semibold tracking-tight">
+                  복잡함을 구조로 풀어내는 개발자, 준입니다.
+                </h2>
+
+                <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                  복잡한 요구를 핵심만 남겨 재정리하고, 빠르게 실행해 실제로 작동하는 제품으로 만드는 일을 좋아합니다.
+                </p>
+
+                <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                  기술보다 방향과 사용자 경험을 먼저 고민하며, 팀과 제품이 더 잘 움직일 수 있는 구조를 만듭니다.
+                </p>
+
+                <div className="mt-4 flex flex-wrap gap-3 text-sm">
+                <a
+                  href="#projects"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToProjects();
+                  }}
+                  className="inline-flex items-center rounded-full border border-accent/70 bg-accent/90 px-4 py-1.5 text-sm font-medium text-white transition-colors duration-300 ease-out hover:bg-accent dark:border-accent-light/70 dark:bg-accent-light/90 dark:hover:bg-accent-light"
+                >
+                  프로젝트 보기
+                </a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Summary */}
+          <section id="summary" className="mb-8">
+            <SectionTitle>Summary</SectionTitle>
+            <p className="mt-3 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+              문제를 기능 단위가 아닌 흐름과 구조 단위로 바라보고, 데이터 기반으로 가설을 검증합니다.
+              빠른 프로토타이핑을 통해 리스크를 줄이고, 제품의 성장 단계에 맞춰 기술 스택과 구조를 최적화합니다.
+              작은 인터랙션부터 시스템 안정성까지 사용자 경험을 구성하는 모든 요소를 균형 있게 다룹니다.
+            </p>
+          </section>
+
+          {/* Skills */}
+          <section
+            id="skills"
+            className="mb-8 border-t border-slate-200 pt-6 dark:border-slate-700"
+          >
+            <SectionTitle>Skills</SectionTitle>
+
+            <div className="mt-4 space-y-5 text-sm">
+              <div className="mt-4 space-y-4 text-sm">
+                <SkillRow
+                  label="Backend / API"
+                  items={[
+                    "Java (Spring Boot)",
+                    "Python (FastAPI)",
+                    "C# (ASP.NET)",
+                    "RabbitMQ",
+                    "Kafka",
+                  ]}
+                />
+                <SkillRow
+                  label="Frontend / UI"
+                  items={[
+                    "React",
+                    "TypeScript",
+                    "Vite",
+                    "Tailwind CSS",
+                    "GSAP",
+                  ]}
+                />
+                <SkillRow
+                  label="Mobile"
+                  items={["Android (Kotlin, Jetpack Compose)"]}
+                />
+                <SkillRow
+                  label="Infra / DevOps"
+                  items={[
+                    "AWS (EC2/RDS)",
+                    "Docker",
+                    "Jenkins",
+                    "CI/CD",
+                  ]}
+                />
+                <SkillRow
+                  label="Data / Storage"
+                  items={[
+                    "PostgreSQL",
+                    "MySQL",
+                    "MSSQL",
+                    "MariaDB",
+                    "Redis",
+                    "Supabase",
+                  ]}
+                />
+              </div>
+
+              {/* 아래: Tech 비중 차트 카드 */}
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-xs shadow-sm dark:border-slate-600 dark:bg-[#383a3d]">
+                <div className="flex items-baseline justify-between gap-3">
+                  <p className="font-semibold text-slate-700 dark:text-slate-100">
+                    Tech Proficiency Overview
+                  </p>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-300">
+                    상대적인 비중 / 활용도 기준 (0–100)
+                  </p>
+                </div>
+
+                {/* 범례(카테고리) */}
+                <div className="mt-2 flex flex-wrap gap-1.5 text-[11px] text-slate-500 dark:text-slate-300">
+                  <span className="rounded-full border border-slate-200 px-2 py-0.5 dark:border-slate-500">
+                    Backend
+                  </span>
+                  <span className="rounded-full border border-slate-200 px-2 py-0.5 dark:border-slate-500">
+                    Frontend
+                  </span>
+                  <span className="rounded-full border border-slate-200 px-2 py-0.5 dark:border-slate-500">
+                    Mobile
+                  </span>
+                  <span className="rounded-full border border-slate-200 px-2 py-0.5 dark:border-slate-500">
+                    Infra / DevOps
+                  </span>
+                </div>
+
+                {/* 차트 영역 */}
+                <div className="mt-3 h-64">
+                  <SkillChart />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Experience */}
+          <section
+            id="experience"
+            className="mb-8 border-t border-slate-200 pt-6 dark:border-slate-700"
+          >
+            <SectionTitle>Experience</SectionTitle>
+
+            <p className="mt-3 text-sm text-slate-700 dark:text-slate-300">
+              다년간 수행한 역할과 책임 중심으로 정리했습니다.
+            </p>
+
+            <div className="mt-4 space-y-5">
+              {/* <ExperienceItem
+                period="2025-10 ~ "
+                role="웹/백엔드? 개발자"
+                org="WMS/WCS 코어 시스템"
+                bullets={[
+                  "중장비 재고 시스템 로봇 제어시스템"
+                ]}
+              />
+              <ExperienceItem
+                period="2022-01 ~ 2025-09"
+                role="웹/백엔드? 개발자"
+                org="게임 임베디드 및 내부 코어/정산 시스템"
+                bullets={[
+                  "게임개발 기반 사내 내부 프로그램 / 사내 직원관리 프로그램 /"
+                ]}
+              /> */}
+              <ExperienceItem
+                period="2025-10 ~"
+                role="웹/백엔드? 개발자"
+                org="차량정비시스템"
+                bullets={[
+                  "BENZ트럭, MAN트럭 등 차량정비시스템 및 SAP",
+                ]}
+              />
+              <ExperienceItem
+                period="2022-01 ~ 2025-09"
+                role="웹/백엔드? 개발자"
+                org="웹/앱 서비스 및 내부 시스템"
+                bullets={[
+                  "해외배송 / 구매, 배송대행 / 역구매대행 / 해외결제 API/ 배송사 API",
+                  "오픈마켓 형식",
+                ]}
+              />
+              <ExperienceItem
+                period="2017-06 ~ 2021-12"
+                role="웹/백엔드? 개발자"
+                org="WMS/WCS 내부 코어 시스템"
+                bullets={[
+                  "WMS/WCS(PAS/DAS/DPA)시스템 솔루션",
+                  "AGV/로봇팔 구축 및 유지관리",
+                  "SCM물류포털, ERP연동",
+                ]}
+              />
+            </div>
+          </section>
+
+          {/* Projects */}
+          <section
+            id="projects"
+            className="mb-8 border-t border-slate-200 pt-6 dark:border-slate-700"
+          >
+            <SectionTitle>Projects</SectionTitle>
+            <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
+              최근에 집중해서 만들었던 프로젝트 몇 가지를 정리했습니다.
+            </p>
+
+            {/* 상위 4개만 노출 */}
+            <div className="mt-4 grid gap-4 md:grid-cols-2">
+              {PROJECTS.slice(0, 4).map((project) => (
+                <ProjectCard
+                  key={project.id}
+                  name={project.name}
+                  description={project.description}
+                  techs={project.techs}
+                  link={project.link}
+                />
+              ))}
             </div>
 
-            <div className="flex-1">
-              {/* <p className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
-                Portfolio
-              </p> */}
-
-              <h2 className="font-inter text-2xl font-semibold tracking-tight">
-                복잡함을 구조로 풀어내는 개발자, 준입니다.
-              </h2>
-
-              <p className="mt-3 text-s leading-relaxed text-slate-600 dark:text-slate-300">
-                웹·모바일·백엔드를 넘나들며 문제의 본질을 찾고,
-                서비스가 단순하게 작동하도록 만드는 데 집중합니다.
-              </p>
-              flex items-start gap-6
-              <p className="mt-2 text-s leading-relaxed text-slate-600 dark:text-slate-300">
-                기술보다 흐름과 사용자 경험을 먼저 고민하며,
-                제품이 실제로 가치로 이어지는 구조를 설계합니다.
-              </p>
-
-              <div className="mt-4 flex flex-wrap gap-3 text-sm">
-              <a
-                href="#projects"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToProjects();
-                }}
-                className="inline-flex items-center rounded-full border border-accent/70 bg-accent/90 px-4 py-1.5 text-sm font-medium text-white transition-colors duration-300 ease-out hover:bg-accent dark:border-accent-light/70 dark:bg-accent-light/90 dark:hover:bg-accent-light"
+            {/* 전체 보기 버튼 */}
+            <div className="mt-4 flex justify-end">
+              <button
+                type="button"
+                onClick={() => setView("projects")}
+                className="text-xs font-medium text-slate-600 underline-offset-4 hover:underline dark:text-slate-200"
               >
-                프로젝트 보기
-              </a>
-              </div>
+                전체 프로젝트 보기 →
+              </button>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Summary */}
-        <section id="summary" className="mb-8">
-          <SectionTitle>Summary</SectionTitle>
-          <p className="mt-3 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
-            복잡한 흐름을 단순한 구조로 정리하고, 실제로 작동하는 제품으로 연결하는 과정에 집중합니다.
-            웹·모바일·백엔드를 넘나들며 필요한 것을 빠르게 실험하고 구현합니다.
-            작은 디테일과 인터랙션이 만드는 사용자 경험을 중요하게 생각하며,
-            더 나은 사용성을 향해 지속적으로 개선합니다.
-          </p>
-        </section>
-
-        {/* Skills */}
-        <section
-          id="skills"
-          className="mb-8 border-t border-slate-200 pt-6 dark:border-slate-700"
-        >
-          <SectionTitle>Skills</SectionTitle>
-
-          <div className="mt-4 space-y-5 text-sm">
-            <div className="mt-4 space-y-4 text-sm">
-              <SkillRow
-                label="Backend / API"
-                items={[
-                  "Java (Spring Boot)",
-                  "Python (FastAPI)",
-                  "C# (ASP.NET)",
-                  "RabbitMQ",
-                  "Kafka",
-                ]}
-              />
-              <SkillRow
-                label="Frontend / UI"
-                items={[
-                  "React",
-                  "TypeScript",
-                  "Vite",
-                  "Tailwind CSS",
-                  "GSAP",
-                ]}
-              />
-              <SkillRow
-                label="Mobile"
-                items={["Android (Kotlin, Jetpack Compose)"]}
-              />
-              <SkillRow
-                label="Infra / DevOps"
-                items={[
-                  "AWS (EC2, ECS, RDS)",
-                  "Docker",
-                  "Jenkins",
-                  "CI/CD",
-                ]}
-              />
-              <SkillRow
-                label="Data / Storage"
-                items={[
-                  "PostgreSQL",
-                  "MySQL",
-                  "MSSQL",
-                  "MariaDB",
-                  "Redis",
-                ]}
-              />
+          {/* Contact */}
+          <section
+            id="contact"
+            className="border-t border-slate-200 pt-6 dark:border-slate-700"
+          >
+            <SectionTitle>Contact</SectionTitle>
+            <p className="mt-3 text-sm text-slate-700 dark:text-slate-300">
+              협업 제안, 문의, 기타 연락은 아래 채널로 부탁드립니다.
+            </p>
+            <div className="mt-3 space-y-1 text-sm">
+              <p>Email: hjj5946@gmail.com</p>
             </div>
-
-            {/* 아래: Tech 비중 차트 카드 */}
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-xs shadow-sm dark:border-slate-600 dark:bg-[#383a3d]">
-              <div className="flex items-baseline justify-between gap-3">
-                <p className="font-semibold text-slate-700 dark:text-slate-100">
-                  Tech Proficiency Overview
-                </p>
-                <p className="text-[11px] text-slate-500 dark:text-slate-300">
-                  상대적인 비중 / 활용도 기준 (0–100)
-                </p>
-              </div>
-
-              {/* 범례(카테고리) */}
-              <div className="mt-2 flex flex-wrap gap-1.5 text-[11px] text-slate-500 dark:text-slate-300">
-                <span className="rounded-full border border-slate-200 px-2 py-0.5 dark:border-slate-500">
-                  Backend
-                </span>
-                <span className="rounded-full border border-slate-200 px-2 py-0.5 dark:border-slate-500">
-                  Frontend
-                </span>
-                <span className="rounded-full border border-slate-200 px-2 py-0.5 dark:border-slate-500">
-                  Mobile
-                </span>
-                <span className="rounded-full border border-slate-200 px-2 py-0.5 dark:border-slate-500">
-                  Infra / DevOps
-                </span>
-              </div>
-
-              {/* 차트 영역 */}
-              <div className="mt-3 h-64">
-                <SkillChart />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Experience */}
-        <section
-          id="experience"
-          className="mb-8 border-t border-slate-200 pt-6 dark:border-slate-700"
-        >
-          <SectionTitle>Experience</SectionTitle>
-
-          <p className="mt-3 text-sm text-slate-700 dark:text-slate-300">
-            다년간 수행한 역할과 책임 중심으로 정리했습니다.
-          </p>
-
-          <div className="mt-4 space-y-5">
-            <ExperienceItem
-              period="2023 — 현재"
-              role="EdTech 서비스 개발자"
-              org="학원/교육 플랫폼"
-              bullets={[
-                "학원, 학부모, 학생을 연결하는 통합 서비스의 앱·웹·백엔드 개발 전반을 담당.",
-                "Android(Kotlin, Jetpack Compose)와 FastAPI, PostgreSQL 기반의 서비스 설계 및 구현.",
-                "실제 운영 환경에서 기능 개선, 성능 튜닝, 장애 대응 등을 경험.",
-              ]}
-            />
-            <ExperienceItem
-              period="이전"
-              role="웹/백엔드 개발자"
-              org="웹 서비스 및 내부 시스템"
-              bullets={[
-                "내부 운영 도구 및 웹 서비스 개발, 유지보수 경험.",
-                "REST API 설계, 인증/인가, 간단한 배포 자동화 등 다양한 백엔드 실무를 수행.",
-              ]}
-            />
-          </div>
-        </section>
-
-        {/* Projects */}
-        <section
-          id="projects"
-          className="mb-8 border-t border-slate-200 pt-6 dark:border-slate-700"
-        >
-          <SectionTitle>Projects</SectionTitle>
-          <div className="mt-4 grid gap-4 md:grid-cols-2">
-            <ProjectCard
-              name="PickStudy"
-              description="학원/학생/학부모를 위한 통합 관리 서비스. 학원용 앱, 학부모용 앱, 관리 웹을 포함."
-              techs={["Kotlin", "Jetpack Compose", "FastAPI", "PostgreSQL"]}
-              link="#"
-            />
-            <ProjectCard
-              name="J GameBox"
-              description="웹 기반 미니 게임 포털. 주사위, 룰렛, 사다리 등 간단한 게임 모음."
-              techs={["React", "TypeScript", "Vite", "Tailwind"]}
-              link="https://example.com"
-            />
-          </div>
-        </section>
-
-        {/* Contact */}
-        <section
-          id="contact"
-          className="border-t border-slate-200 pt-6 dark:border-slate-700"
-        >
-          <SectionTitle>Contact</SectionTitle>
-          <p className="mt-3 text-sm text-slate-700 dark:text-slate-300">
-            협업 제안, 문의, 기타 연락은 아래 채널로 부탁드립니다.
-          </p>
-          <div className="mt-3 space-y-1 text-sm">
-            <p>Email: hjj5946@gmail.com</p>
-          </div>
-        </section>
-      </main>
+          </section>
+        </main>
+      ) : (
+        <main className="mx-auto max-w-3xl px-4 pb-16 pt-8">
+          <ProjectsPage onBack={() => setView("home")} />
+        </main>
+      )}
 
       {/* 우측 하단 스크롤 위로 버튼 */}
       <ScrollToTopButton visible={showScrollTop} onClick={scrollToTop} />
@@ -541,5 +651,42 @@ const scrollToProjects = () => {
     behavior: "smooth",
   });
 };
+
+type ProjectsPageProps = {
+  onBack: () => void;
+};
+
+function ProjectsPage({ onBack }: ProjectsPageProps) {
+  return (
+    <section className="mb-8">
+      <SectionTitle>All Projects</SectionTitle>
+      <p className="mt-3 text-sm text-slate-700 dark:text-slate-300">
+        실제로 운영·출시했거나 의미 있게 진행했던 프로젝트들을 정리했습니다.
+      </p>
+
+      <div className="mt-4 grid gap-4 md:grid-cols-2">
+        {PROJECTS.map((project) => (
+          <ProjectCard
+            key={project.id}
+            name={project.name}
+            description={project.description}
+            techs={project.techs}
+            link={project.link}
+          />
+        ))}
+      </div>
+
+      <div className="mt-6 flex justify-end">
+        <button
+          type="button"
+          onClick={onBack}
+          className="text-xs font-medium text-slate-600 underline-offset-4 hover:underline dark:text-slate-200"
+        >
+          메인으로 돌아가기
+        </button>
+      </div>
+    </section>
+  );
+}
 
 export default App;
