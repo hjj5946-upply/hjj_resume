@@ -348,23 +348,28 @@ function App() {
             </p>
 
             <div className="mt-4 space-y-5">
-              {/* <ExperienceItem
-                period="2025-10 ~ "
-                role="웹/백엔드? 개발자"
-                org="WMS/WCS 코어 시스템"
+              <ExperienceItem
+                period="2025-10 ~"
+                role="Backend Engineer"
+                org="WMS/WCS Core Automation Systems"
                 bullets={[
-                  "중장비 재고 시스템 로봇 제어시스템"
+                  "중장비 물류 환경을 위한 재고 관리 시스템 및 WCS 코어 제어 시스템 운영·관리",
+                  "WCS 기반 설비 제어 로직 및 로봇 제어 시스템 유지보수 및 안정화",
+                  "물류 자동화 설비와 연계된 내부 코어 시스템 관리 및 운영 지원"
                 ]}
               />
               <ExperienceItem
                 period="2022-01 ~ 2025-09"
-                role="웹/백엔드? 개발자"
-                org="게임 임베디드 및 내부 코어/정산 시스템"
-                bullets={[51212
-                  "게임개발 기반 사내 내부 프로그램 / 사내 직원관리 프로그램 /"
+                role="Backend Engineer"
+                org="Game Embedded & Internal Core Systems"
+                bullets={[
+                  "게임 서비스 운영을 위한 사내 내부 코어 시스템 및 관리 도구 개발",
+                  "게임 데이터 기반 정산 시스템 및 운영 지원 백엔드 로직 구현",
+                  "사내 직원 관리 및 운영 편의를 위한 내부 프로그램 개발",
+                  "서비스 운영에 필요한 관리 기능 및 업무 자동화 도구 구축"
                 ]}
-              /> */}
-              <ExperienceItem
+              />
+              {/* <ExperienceItem
                 period="2025-10 ~"
                 role="Backend Engineer"
                 org="Commercial Vehicle Service & Parts System"
@@ -387,7 +392,7 @@ function App() {
                   "내부 운영을 위한 경량 WMS 형태의 재고 관리 시스템 구축 및 운영",
                   "안드로이드 앱 개발에 직접 참여하여 서비스 기능 구현 및 운영 지원"
                 ]}
-              />
+              /> */}
               <ExperienceItem
                 period="2017-06 ~ 2021-12 (4년 6개월)"
                 role="Web / Backend Engineer"
