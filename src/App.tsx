@@ -360,35 +360,44 @@ function App() {
                 period="2022-01 ~ 2025-09"
                 role="웹/백엔드? 개발자"
                 org="게임 임베디드 및 내부 코어/정산 시스템"
-                bullets={[
+                bullets={[51212
                   "게임개발 기반 사내 내부 프로그램 / 사내 직원관리 프로그램 /"
                 ]}
               /> */}
               <ExperienceItem
                 period="2025-10 ~"
-                role="웹/백엔드? 개발자"
-                org="차량정비시스템"
+                role="Backend Engineer"
+                org="Commercial Vehicle Service & Parts System"
                 bullets={[
-                  "BENZ트럭, MAN트럭 등 차량정비시스템 및 SAP",
+                  "벤츠트럭(BENZ Truck), MAN 트럭 등 상용차 제조사의 직영·대리점 서비스 정비센터를 위한 정비 시스템 구축 및 운영",
+                  "차량 입고부터 PDI, 정비 이력 관리까지 정비 전 과정을 관리하는 백엔드 시스템 설계·구현",
+                  "정비 시스템 내 SAP 연동을 통한 부품, 비용, 환율 기반 관리 로직 개발",
+                  "차량 부품 WMS 시스템 구축 및 재고 흐름 관리 기능 구현",
+                  "운영 중인 상용 시스템의 유지보수 및 안정화 작업 수행"
                 ]}
               />
               <ExperienceItem
-                period="2022-01 ~ 2025-09"
-                role="웹/백엔드? 개발자"
-                org="웹/앱 서비스 및 내부 시스템"
+                period="2022-01 ~ 2025-09 (3년 8개월)"
+                role="Backend Engineer / Full-Stack Engineer"
+                org="Overseas Commerce & Logistics Platform"
                 bullets={[
-                  "해외배송 / 구매, 배송대행 / 역구매대행 / 해외결제 API/ 배송사 API",
-                  "오픈마켓 형식",
+                  "해외 구매대행·배송대행·역구매대행 서비스를 제공하는 커머스/물류 플랫폼을 백지 상태에서 설계·구축",
+                  "해외 결제 API, 배송사 API 연동을 포함한 주문·결제·배송 전체 흐름의 백엔드 시스템 개발",
+                  "외부 쇼핑몰이 자사 API 버튼을 통해 구매대행 및 장바구니 기능을 사용할 수 있는 연동 구조 설계",
+                  "내부 운영을 위한 경량 WMS 형태의 재고 관리 시스템 구축 및 운영",
+                  "안드로이드 앱 개발에 직접 참여하여 서비스 기능 구현 및 운영 지원"
                 ]}
               />
               <ExperienceItem
-                period="2017-06 ~ 2021-12"
-                role="웹/백엔드? 개발자"
-                org="WMS/WCS 내부 코어 시스템"
+                period="2017-06 ~ 2021-12 (4년 6개월)"
+                role="Web / Backend Engineer"
+                org="WMS/WCS Core Solution"
                 bullets={[
-                  "WMS/WCS(PAS/DAS/DPA)시스템 솔루션",
-                  "AGV/로봇팔 구축 및 유지관리",
-                  "SCM물류포털, ERP연동",
+                  "중소·대기업 및 화주사 물류센터에 납품되는 WMS 솔루션 설계·개발 및 유지보수",
+                  "PAS/DAS/DPS 등 WCS 피킹·분배 시스템 구현 및 설비 제어 로직 개발, 현장 연동 및 안정화",
+                  "AGV, 로봇팔 등 자동화 설비와 연계된 물류 프로세스 구축 및 운영 지원",
+                  "ERP·SAP 등 외부 시스템과의 데이터 연동 및 인터페이스 개발",
+                  "내부 SCM 물류 포털 및 MES 시스템 개발·운영"
                 ]}
               />
             </div>
