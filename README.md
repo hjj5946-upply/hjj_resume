@@ -1,6 +1,6 @@
 # Developer Portfolio — Hong JeongJun
 
-본 프로젝트는 개발자 **홍정준(Hong JeongJun) 의 기술 역량과 프로젝트 경험을 소개하기 위한 개인 포트폴리오 사이트입니다.  
+본 프로젝트는 개발자 홍정준(Hong JeongJun) 의 기술 역량과 프로젝트 경험을 소개하기 위한 개인 포트폴리오 사이트입니다.  
 가독성과 접근성을 우선으로 한 단일 페이지 구조로 설계되었으며, 반응형 UI와 다크 모드를 지원합니다.
 
 ## Overview
@@ -41,4 +41,3 @@
 - SkillChart, ExperienceItem, ProjectCard 등 독립 컴포넌트 구성
 
 ## Project Structure
-
