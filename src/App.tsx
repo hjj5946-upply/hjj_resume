@@ -16,68 +16,119 @@ type Theme = "light" | "dark";
 type View = "home" | "projects";
 
 const PROJECTS = [
+  
+  // ────────── 대표 프로젝트 4개 ──────────
   {
-    id: "jgamebox",
-    name: "J GameBox",
+    id: "toel-platform",
+    name: "TOEL – Overseas Commerce & Logistics Platform",
     description:
-      "웹 기반 미니 게임 포털. 주사위, 룰렛, 사다리 등 가벼운 게임을 빠르게 즐길 수 있는 PWA 스타일 서비스.",
-    techs: ["React", "TypeScript", "Vite", "Tailwind", "Planck.js", "SaaS", "GitHub"],
-    link: "https://jun-gamebox.com",
+      "해외 구매대행·배송대행·역구매대행 서비스를 제공하는 커머스/물류 플랫폼을 제로베이스에서 설계·구축. 해외결제, 배송사 API 연동과 자체 물류 프로세스를 포함한 엔드투엔드 시스템.",
+    techs: ["React", "Spring Boot", "JPA", "MySQL", "AWS", "Payment API", "Shipping API"],
+    link: undefined,
+  },
+  {
+    id: "vehicle-service",
+    name: "Commercial Vehicle Service & Parts System",
+    description:
+      "벤츠트럭(BENZ), MAN 트럭 등 상용차 제조사의 직영·대리점 정비센터를 위한 정비·부품·재고 관리 시스템. PDI, 정비 이력, SAP 연동 및 부품 WMS를 포함한 엔터프라이즈 백엔드 구축.",
+    techs: ["Spring Boot", "SAP", "WMS", "PostgreSQL", "Enterprise System"],
+    link: undefined,
+  },
+  {
+    id: "wms-wcs-automation",
+    name: "WMS/WCS Automation Solution",
+    description:
+      "중소·대기업 물류센터에 납품되는 WMS/WCS 솔루션 개발. PAS/DAS/DPS, AGV, 로봇팔 등 자동화 설비 제어와 ERP/SAP 연동을 포함한 물류 코어 시스템.",
+    techs: ["C#", "ASP.NET", "MSSQL", "WMS", "WCS", "AGV", "Robot"],
+    link: undefined,
   },
   {
     id: "pickstudy",
     name: "PickStudy",
     description:
-      "학원·학생·학부모를 연결하는 통합 관리 서비스. 학원용 앱, 학부모용 앱, 관리 웹을 포함한 풀스택 프로젝트.",
-    techs: ["Kotlin", "Jetpack Compose", "FastAPI", "PostgreSQL", "Redis", "Kafka", "Jenkins"],
+      "학원·학생·학부모를 연결하는 통합 관리 플랫폼. 학생용/관리자용 앱과 백엔드를 풀스택으로 설계·구현하고 실시간 위치, 알림, 관리 기능을 포함한 MVP 완성.",
+    techs: ["Kotlin", "Jetpack Compose", "FastAPI", "PostgreSQL", "AWS", "React"],
     link: "https://pick-study.edu",
   },
+
+  // ────────── 전체 프로젝트 ──────────
   {
-    id: "toel",
-    name: "Btorate",
+    id: "toel-addon",
+    name: "TOEL-ADDON – Inventory Automation",
     description:
-      "해외 배송·구매대행·결제/정산·WMS/WCS/SCM를 통합한 B2B 웹 포털. 운영 실무를 위한 관리 콘솔 및 대시보드 구축.",
-    techs: ["Java", "Spring Boot", "MySQL", "Redis", "RabbitMQ", "AWS"],
-    link: undefined, // 외부에서 볼 수 없으면 undefined 그대로 두면 됨
+      "TOEL 솔루션에 현장 프로세스 기반 재고 관리 및 자동화 기능을 추가하여 운영 효율을 개선.",
+    techs: ["React", "Spring Boot", "MySQL", "AWS"],
   },
   {
-    id: "wms",
-    name: "WMS System",
+    id: "toel2",
+    name: "TOEL2 – Payment & Shipping API Integration",
     description:
-      "개인 지출 패턴을 태그와 그래프로 시각화하는 웹 서비스. 카테고리별 분석과 정기 지출 관리 기능 제공.",
-    techs: ["React", "TypeScript", "Node.js", "PostgreSQL"],
-    link: undefined,
+      "PayPal·Stripe 및 DHL·USPS 등 해외결제/배송사 API를 통합하여 결제·배송 자동화와 실시간 추적 기능 고도화.",
+    techs: ["Spring Boot", "Payment API", "Shipping API", "AWS"],
   },
   {
-    id: "wcs",
-    name: "PAS/DAS",
+    id: "toel3",
+    name: "TOEL3 – Open Market Platform",
     description:
-      "개인 지출 패턴을 태그와 그래프로 시각화하는 웹 서비스. 카테고리별 분석과 정기 지출 관리 기능 제공.",
-    techs: ["React", "TypeScript", "Node.js", "PostgreSQL"],
-    link: undefined,
+      "기존 구매대행 솔루션을 확장한 오픈마켓 플랫폼 MVP. 판매자·상품·정산 구조 설계 및 핵심 기능 구현.",
+    techs: ["React", "Spring Boot", "MySQL", "AWS"],
   },
   {
-    id: "account",
-    name: "씀씀이 기록",
+    id: "logistics-dashboard",
+    name: "Logistics Portal & SCM Dashboard",
     description:
-      "개인 지출 패턴을 태그와 그래프로 시각화하는 웹 서비스. 카테고리별 분석과 정기 지출 관리 기능 제공.",
-    techs: ["React", "TypeScript", "Node.js", "PostgreSQL"],
-    link: "https://hjj5946-upply.github.io/actbook/lock",
+      "주문·배송·재고 데이터를 통합 조회하는 물류 포털 및 SCM 대시보드 구축.",
+    techs: ["React", "Spring Boot", "Dashboard", "SCM"],
   },
   {
-    id: "covid19",
-    name: "열화상 데이터",
+    id: "assist-korea-wms",
+    name: "Assist Korea – WMS Migration",
     description:
-      "개인 지출 패턴을 태그와 그래프로 시각화하는 웹 서비스. 카테고리별 분석과 정기 지출 관리 기능 제공.",
-    techs: ["React", "TypeScript", "Node.js", "PostgreSQL"],
-    link: undefined,
+      "노후 외주 WMS를 자체 솔루션으로 전환하여 재고 정확도 및 처리 성능을 개선.",
+    techs: ["C#", "ASP.NET", "MSSQL", "WMS"],
+  },
+  {
+    id: "abc-mart",
+    name: "ABC Mart – Large-scale WMS/WCS 구축",
+    description:
+      "대형 물류센터 이전에 맞춰 WMS 재구축 및 PAS·로봇팔 기반 WCS 도입.",
+    techs: ["C#", "WMS", "WCS", "Robot", "MSSQL"],
+  },
+  {
+    id: "2p3p",
+    name: "2PL → 3PL Logistics Transformation",
+    description:
+      "다중 화주사 대응을 위한 3PL 물류 시스템 확장 및 프로세스 파라미터화.",
+    techs: ["ASP.NET", "MSSQL", "3PL", "ERP"],
+  },
+  {
+    id: "jupiter",
+    name: "Jupiter – WMS Web Migration",
+    description:
+      "레거시 Windows 기반 WMS를 웹 기반으로 재구축하여 유지보수성과 확장성 확보.",
+    techs: ["ASP.NET", "MSSQL", "WMS"],
+  },
+  {
+    id: "covid-sollog",
+    name: "COVID-SOLLOG",
+    description:
+      "열화상 카메라 기반 체온 측정 및 출입 관리 웹 서비스.",
+    techs: ["Python", "React", "MySQL", "Redis"],
+  },
+  {
+    id: "jgamebox",
+    name: "J GameBox",
+    description:
+      "웹 기반 미니 게임 포털 서비스. 간단한 게임을 빠르게 즐길 수 있는 PWA 스타일 플랫폼.",
+    techs: ["React", "TypeScript", "Vite", "Tailwind"],
+    link: "https://jun-gamebox.com",
   },
   {
     id: "elfin",
-    name: "엘핀 쇼핑몰",
+    name: "Elfin – Women's Shopping Mall SaaS",
     description:
-      "개인 지출 패턴을 태그와 그래프로 시각화하는 웹 서비스. 카테고리별 분석과 정기 지출 관리 기능 제공.",
-    techs: ["ReactJS", "Fiber", "SaaS", "supabase", "GitHub"],
+      "여성 패션 쇼핑몰을 위한 사용자 웹사이트 및 관리자 페이지를 1인 개발한 SaaS 형태의 서비스. 반응형 UI 기반으로 상품·주문·운영 관리 기능을 구현하고, Supabase를 활용한 데이터 관리 및 ECS 기반 배포 환경 구축.",
+    techs: ["React", "Responsive Web", "Supabase", "ECS", "SaaS"],
     link: undefined,
   },
 ];
