@@ -48,7 +48,7 @@ const PROJECTS = [
     description:
       "학원·학생·학부모를 연결하는 통합 관리 플랫폼. 학생용/관리자용 앱과 백엔드를 풀스택으로 설계·구현하고 실시간 위치, 알림, 관리 기능을 포함한 MVP 완성.",
     techs: ["Kotlin", "Jetpack Compose", "FastAPI", "PostgreSQL", "AWS", "React"],
-    link: "https://pick-study.edu",
+    link: undefined,
   },
 
   // ────────── 전체 프로젝트 ──────────
@@ -57,21 +57,21 @@ const PROJECTS = [
     name: "TOEL-ADDON – Inventory Automation",
     description:
       "TOEL 솔루션에 현장 프로세스 기반 재고 관리 및 자동화 기능을 추가하여 운영 효율을 개선.",
-    techs: ["React", "Spring Boot", "MySQL", "AWS"],
+    techs: ["React", "Spring Boot", "MySQL", "AWS", "WMS"],
   },
   {
     id: "toel2",
     name: "TOEL2 – Payment & Shipping API Integration",
     description:
       "PayPal·Stripe 및 DHL·USPS 등 해외결제/배송사 API를 통합하여 결제·배송 자동화와 실시간 추적 기능 고도화.",
-    techs: ["Spring Boot", "Payment API", "Shipping API", "AWS"],
+    techs: ["Spring Boot", "Payment API", "Shipping API", "AWS", "Redis", "Kafka", "Jenkins"],
   },
   {
     id: "toel3",
     name: "TOEL3 – Open Market Platform",
     description:
       "기존 구매대행 솔루션을 확장한 오픈마켓 플랫폼 MVP. 판매자·상품·정산 구조 설계 및 핵심 기능 구현.",
-    techs: ["React", "Spring Boot", "MySQL", "AWS"],
+    techs: ["React", "Spring Boot", "MySQL", "AWS", "Redis", "Kafka", "Jenkins"],
   },
   {
     id: "logistics-dashboard",
@@ -92,7 +92,7 @@ const PROJECTS = [
     name: "ABC Mart – Large-scale WMS/WCS 구축",
     description:
       "대형 물류센터 이전에 맞춰 WMS 재구축 및 PAS·로봇팔 기반 WCS 도입.",
-    techs: ["C#", "WMS", "WCS", "Robot", "MSSQL"],
+    techs: ["C#", "WMS", "WCS", "Robot", "MSSQL", "RabbitMQ", "Docker"],
   },
   {
     id: "2p3p",
@@ -106,13 +106,13 @@ const PROJECTS = [
     name: "Jupiter – WMS Web Migration",
     description:
       "레거시 Windows 기반 WMS를 웹 기반으로 재구축하여 유지보수성과 확장성 확보.",
-    techs: ["ASP.NET", "MSSQL", "WMS"],
+    techs: ["ASP.NET", "MSSQL", "WMS", "RabbitMQ"],
   },
   {
     id: "covid-sollog",
     name: "COVID-SOLLOG",
     description:
-      "열화상 카메라 기반 체온 측정 및 출입 관리 웹 서비스.",
+      "열화상 카메라 기반 체온 측정 및 출입 관리 태블릿 서비스.",
     techs: ["Python", "React", "MySQL", "Redis"],
   },
   {
@@ -129,7 +129,15 @@ const PROJECTS = [
     description:
       "여성 패션 쇼핑몰을 위한 사용자 웹사이트 및 관리자 페이지를 1인 개발한 SaaS 형태의 서비스. 반응형 UI 기반으로 상품·주문·운영 관리 기능을 구현하고, Supabase를 활용한 데이터 관리 및 ECS 기반 배포 환경 구축.",
     techs: ["React", "Responsive Web", "Supabase", "ECS", "SaaS"],
-    link: undefined,
+    link: "https://elfin.co.kr",
+  },
+  {
+    id: "account",
+    name: "씀씀이 기록",
+    description:
+      "개인 지출 패턴을 태그와 그래프로 시각화한 PWA 기반 개인 재무 관리 웹 서비스. 오프라인 사용을 지원하며, 카테고리별 분석과 정기 지출 관리 기능을 구현.",
+    techs: ["React", "TypeScript", "PWA", "Data Visualization"],
+    link: "https://hjj5946-upply.github.io/actbook/lock",
   },
 ];
 
