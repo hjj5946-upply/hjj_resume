@@ -726,7 +726,7 @@ function ProjectsPage({ onBack }: ProjectsPageProps) {
     <section className="mb-8">
       <SectionTitle>All Projects</SectionTitle>
       <p className="mt-3 text-sm text-slate-700 dark:text-slate-300">
-        실제로 운영·출시했거나 의미 있게 진행했던 프로젝트들을 정리했습니다.
+        자사, 외주·프리랜서 및 개인 프로젝트 중 실제 서비스 기준으로 개발을 완료하고, 인계 또는 운영까지 수행한 프로젝트들을 정리했습니다.
       </p>
 
       <div className="mt-4 grid gap-4 md:grid-cols-2">
