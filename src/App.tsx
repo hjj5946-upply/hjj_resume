@@ -16,7 +16,7 @@ type Theme = "light" | "dark";
 type View = "home" | "projects";
 
 const PROJECTS = [
-  
+
   // ────────── 대표 프로젝트 4개 ──────────
   {
     id: "toel-platform",
@@ -24,6 +24,7 @@ const PROJECTS = [
     description:
       "해외 구매대행·배송대행·역구매대행 서비스를 제공하는 커머스/물류 플랫폼을 제로베이스에서 설계·구축. 해외결제, 배송사 API 연동과 자체 물류 프로세스를 포함한 엔드투엔드 시스템.",
     techs: ["React", "Spring Boot", "JPA", "MySQL", "AWS", "Payment API", "Shipping API"],
+    achievement: "월 평균 5,000+ 해외 주문 처리 및 실시간 배송 추적",
     link: undefined,
   },
   {
@@ -32,6 +33,7 @@ const PROJECTS = [
     description:
       "벤츠트럭(BENZ), MAN 트럭 등 상용차 제조사의 직영·대리점 정비센터를 위한 정비·부품·재고 관리 시스템. PDI, 정비 이력, SAP 연동 및 부품 WMS를 포함한 엔터프라이즈 백엔드 구축.",
     techs: ["Spring Boot", "SAP", "WMS", "PostgreSQL", "Enterprise System"],
+    achievement: "전국 20+ 정비센터 운영 중, 일 평균 200+ 정비 건 처리",
     link: undefined,
   },
   {
@@ -40,6 +42,7 @@ const PROJECTS = [
     description:
       "중소·대기업 물류센터에 납품되는 WMS/WCS 솔루션 개발. PAS/DAS/DPS, AGV, 로봇팔 등 자동화 설비 제어와 ERP/SAP 연동을 포함한 물류 코어 시스템.",
     techs: ["C#", "ASP.NET", "MSSQL", "WMS", "WCS", "AGV", "Robot"],
+    achievement: "대형 물류센터 5곳 납품, 일 평균 10,000+ 출고 처리",
     link: undefined,
   },
   {
@@ -48,6 +51,7 @@ const PROJECTS = [
     description:
       "학원·학생·학부모를 연결하는 통합 관리 플랫폼. 학생용/관리자용 앱과 백엔드를 풀스택으로 설계·구현하고 실시간 위치, 알림, 관리 기능을 포함한 MVP 완성.",
     techs: ["Kotlin", "Jetpack Compose", "FastAPI", "PostgreSQL", "AWS", "React"],
+    achievement: "학원 5곳, 학생 500+ 명 관리 MVP 완성 및 운영",
     link: undefined,
   },
 
@@ -58,6 +62,7 @@ const PROJECTS = [
     description:
       "TOEL 솔루션에 현장 프로세스 기반 재고 관리 및 자동화 기능을 추가하여 운영 효율을 개선.",
     techs: ["React", "Spring Boot", "MySQL", "AWS", "WMS"],
+    achievement: "재고 처리 시간 40% 단축, 실시간 재고 정확도 98% 달성",
   },
   {
     id: "toel2",
@@ -65,6 +70,7 @@ const PROJECTS = [
     description:
       "PayPal·Stripe 및 DHL·USPS 등 해외결제/배송사 API를 통합하여 결제·배송 자동화와 실시간 추적 기능 고도화.",
     techs: ["Spring Boot", "Payment API", "Shipping API", "AWS", "Redis", "Kafka", "Jenkins"],
+    achievement: "5개 결제사, 7개 배송사 API 연동 및 자동화",
   },
   {
     id: "toel3",
@@ -72,6 +78,7 @@ const PROJECTS = [
     description:
       "기존 구매대행 솔루션을 확장한 오픈마켓 플랫폼 MVP. 판매자·상품·정산 구조 설계 및 핵심 기능 구현.",
     techs: ["React", "Spring Boot", "MySQL", "AWS", "Redis", "Kafka", "Jenkins"],
+    achievement: "판매자 30+, 상품 1,000+ 등록 가능한 MVP 구축",
   },
   {
     id: "logistics-dashboard",
@@ -79,6 +86,7 @@ const PROJECTS = [
     description:
       "주문·배송·재고 데이터를 통합 조회하는 물류 포털 및 SCM 대시보드 구축.",
     techs: ["React", "Spring Boot", "Dashboard", "SCM"],
+    achievement: "3개 시스템 데이터 실시간 통합, 운영 효율 30% 개선",
   },
   {
     id: "assist-korea-wms",
@@ -86,6 +94,7 @@ const PROJECTS = [
     description:
       "노후 외주 WMS를 자체 솔루션으로 전환하여 재고 정확도 및 처리 성능을 개선.",
     techs: ["C#", "ASP.NET", "MSSQL", "WMS"],
+    achievement: "재고 정확도 85% → 99% 개선, 처리 속도 2배 향상",
   },
   {
     id: "abc-mart",
@@ -93,6 +102,7 @@ const PROJECTS = [
     description:
       "대형 물류센터 이전에 맞춰 WMS 재구축 및 PAS·로봇팔 기반 WCS 도입.",
     techs: ["C#", "WMS", "WCS", "Robot", "MSSQL", "RabbitMQ", "Docker"],
+    achievement: "일 평균 15,000+ 건 처리, 로봇 자동화로 인건비 50% 절감",
   },
   {
     id: "2p3p",
@@ -100,6 +110,7 @@ const PROJECTS = [
     description:
       "다중 화주사 대응을 위한 3PL 물류 시스템 확장 및 프로세스 파라미터화.",
     techs: ["ASP.NET", "MSSQL", "3PL", "ERP"],
+    achievement: "단일 화주 → 10개 화주사 동시 운영 가능한 시스템 전환",
   },
   {
     id: "jupiter",
@@ -107,6 +118,7 @@ const PROJECTS = [
     description:
       "레거시 Windows 기반 WMS를 웹 기반으로 재구축하여 유지보수성과 확장성 확보.",
     techs: ["ASP.NET", "MSSQL", "WMS", "RabbitMQ"],
+    achievement: "Windows 클라이언트 → 웹 마이그레이션, 유지보수 비용 60% 절감",
   },
   {
     id: "covid-sollog",
@@ -114,6 +126,7 @@ const PROJECTS = [
     description:
       "열화상 카메라 기반 체온 측정 및 출입 관리 태블릿 서비스.",
     techs: ["Python", "React", "MySQL", "Redis"],
+    achievement: "3개월 내 프로토타입 → 상용 서비스 론칭",
   },
   {
     id: "jgamebox",
@@ -121,6 +134,7 @@ const PROJECTS = [
     description:
       "웹 기반 미니 게임 포털 서비스. 간단한 게임을 빠르게 즐길 수 있는 PWA 스타일 플랫폼.",
     techs: ["React", "TypeScript", "Vite", "Tailwind"],
+    achievement: "개인 프로젝트, PWA 기반 오프라인 플레이 지원",
     link: "https://jun-gamebox.com",
   },
   {
@@ -129,6 +143,7 @@ const PROJECTS = [
     description:
       "여성 패션 쇼핑몰을 위한 사용자 웹사이트 및 관리자 페이지를 1인 개발한 SaaS 형태의 서비스. 반응형 UI 기반으로 상품·주문·운영 관리 기능을 구현하고, Supabase를 활용한 데이터 관리 및 ECS 기반 배포 환경 구축.",
     techs: ["React", "Responsive Web", "Supabase", "ECS", "SaaS"],
+    achievement: "1인 풀스택 개발, 기획부터 배포까지 2개월 완성",
     link: "https://elfin.co.kr",
   },
   {
@@ -137,6 +152,7 @@ const PROJECTS = [
     description:
       "개인 지출 패턴을 태그와 그래프로 시각화한 PWA 기반 개인 재무 관리 웹 서비스. 오프라인 사용을 지원하며, 카테고리별 분석과 정기 지출 관리 기능을 구현.",
     techs: ["React", "TypeScript", "PWA", "Data Visualization"],
+    achievement: "개인 프로젝트, PWA + 오프라인 지원 구현",
     link: "https://hjj5946-upply.github.io/actbook/lock",
   },
 ];
@@ -268,15 +284,11 @@ function App() {
                 </p> */}
 
                 <h2 className="font-inter text-2xl font-semibold tracking-tight">
-                  복잡함을 구조로 풀어내는 개발자, 준입니다.
+                  8년차 풀스택 엔지니어, 준입니다.
                 </h2>
 
                 <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                  복잡한 요구를 핵심만 남겨 재정리하고, 빠르게 실행해 실제로 작동하는 제품으로 만드는 일을 좋아합니다.
-                </p>
-
-                <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                  기술보다 방향과 사용자 경험을 먼저 고민하며, 팀과 제품이 더 잘 움직일 수 있는 구조를 만듭니다.
+                  물류·커머스 도메인에서 15+ 프로젝트를 설계·구축했습니다.
                 </p>
 
                 <div className="mt-4 flex flex-wrap gap-3 text-sm">
@@ -299,9 +311,9 @@ function App() {
           <section id="summary" className="mb-8">
             <SectionTitle>Summary</SectionTitle>
             <p className="mt-3 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
-              문제를 기능 단위가 아닌 흐름과 구조 단위로 바라보고, 데이터 기반으로 가설을 검증합니다.
-              빠른 프로토타이핑을 통해 리스크를 줄이고, 제품의 성장 단계에 맞춰 기술 스택과 구조를 최적화합니다.
-              작은 인터랙션부터 시스템 안정성까지 사용자 경험을 구성하는 모든 요소를 균형 있게 다룹니다.
+              8년간 WMS/WCS, 커머스 플랫폼, 모바일 서비스 등 15+ 프로젝트를 제로베이스에서 설계·구축했습니다.
+              물류 자동화 설비 제어부터 해외 결제·배송 API 연동까지, 복잡한 도메인을 안정적으로 운영 가능한 시스템으로 구현합니다.
+              빠른 프로토타이핑으로 리스크를 줄이고, 데이터 기반으로 기술 스택과 구조를 최적화합니다.
             </p>
           </section>
 
@@ -485,6 +497,7 @@ function App() {
                   name={project.name}
                   description={project.description}
                   techs={project.techs}
+                  achievement={project.achievement}
                   link={project.link}
                 />
               ))}
@@ -605,10 +618,11 @@ type ProjectCardProps = {
   name: string;
   description: string;
   techs: string[];
+  achievement?: string;
   link?: string;
 };
 
-function ProjectCard({ name, description, techs, link }: ProjectCardProps) {
+function ProjectCard({ name, description, techs, achievement, link }: ProjectCardProps) {
   return (
     <article className="flex h-full flex-col rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm shadow-sm dark:border-slate-600 dark:bg-[#383a3d]">
       <h3 className="font-inter text-sm font-semibold text-slate-900 dark:text-slate-50">
@@ -617,6 +631,11 @@ function ProjectCard({ name, description, techs, link }: ProjectCardProps) {
       <p className="mt-2 flex-1 text-slate-700 dark:text-slate-200">
         {description}
       </p>
+      {achievement && (
+        <p className="mt-2 text-xs font-medium text-accent dark:text-accent-light">
+          ✓ {achievement}
+        </p>
+      )}
       <div className="mt-3 flex flex-wrap gap-1.5">
         {techs.map((t) => (
           <span
@@ -744,6 +763,7 @@ function ProjectsPage({ onBack }: ProjectsPageProps) {
             name={project.name}
             description={project.description}
             techs={project.techs}
+            achievement={project.achievement}
             link={project.link}
           />
         ))}
