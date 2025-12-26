@@ -288,7 +288,11 @@ function App() {
                 </h2>
 
                 <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                  물류·커머스 도메인에서 15+ 프로젝트를 설계·구축했습니다.
+                  물류·커머스 도메인을 중심으로 WMS/WCS 자동화 시스템, 해외 구매대행 플랫폼, 모바일 서비스 등을 설계하고 구축해왔습니다.
+                </p>
+
+                <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                  복잡한 요구사항을 실행 가능한 구조로 풀어내고, 실제로 작동하는 시스템을 만드는 일에 집중합니다.
                 </p>
 
                 <div className="mt-4 flex flex-wrap gap-3 text-sm">
