@@ -288,11 +288,12 @@ function App() {
                 </h2>
 
                 <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                  물류·커머스 도메인을 중심으로 WMS/WCS 자동화 시스템, 해외 구매대행 플랫폼, 모바일 서비스 등을 설계하고 구축해왔습니다.
+                  백엔드 개발을 중심으로 프론트엔드, 모바일까지 다루는 풀스택 개발자입니다.
+                  엔터프라이즈 시스템부터 소비자 서비스까지, 다양한 규모와 도메인의 제품을 만들어왔습니다.
                 </p>
 
                 <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                  복잡한 요구사항을 실행 가능한 구조로 풀어내고, 실제로 작동하는 시스템을 만드는 일에 집중합니다.
+                  복잡한 요구사항을 명확한 구조로 풀어내고, 실제로 작동하는 시스템을 만드는 일에 집중합니다.
                 </p>
 
                 <div className="mt-4 flex flex-wrap gap-3 text-sm">
@@ -315,7 +316,7 @@ function App() {
           <section id="summary" className="mb-8">
             <SectionTitle>Summary</SectionTitle>
             <p className="mt-3 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
-              8년간 WMS/WCS, 커머스 플랫폼, 모바일 서비스 등 15+ 프로젝트를 제로베이스에서 설계·구축했습니다.
+              8년간 WMS/WCS, 커머스 플랫폼, 모바일 서비스 등 프로젝트를 제로베이스에서 설계·구축했습니다.
               물류 자동화 설비 제어부터 해외 결제·배송 API 연동까지, 복잡한 도메인을 안정적으로 운영 가능한 시스템으로 구현합니다.
               빠른 프로토타이핑으로 리스크를 줄이고, 데이터 기반으로 기술 스택과 구조를 최적화합니다.
             </p>
