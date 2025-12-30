@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { SkillChart } from "./components/SkillChart.tsx";
 import LogoImg from "/android-icon-192x192.png";
+import profileImg from '../public/profile_img.jpg';
 
 import {
   FiGithub,
@@ -274,8 +275,12 @@ function App() {
           <section className="mb-8 border-b border-slate-200 pb-6 dark:border-slate-700">
             <div className="flex flex-col items-center gap-6 md:flex-row md:items-start">
               {/* 프로필 이미지 틀 */}
-              <div className="w-40 aspect-square flex-shrink-0 rounded-xl border border-slate-300 bg-slate-100 text-xs text-slate-500 dark:border-slate-600 dark:bg-[#383a3d] dark:text-slate-400 flex items-center justify-center md:w-[25%]">
-                Image Here
+              <div className="w-40 aspect-square flex-shrink-0 rounded-xl overflow-hidden border border-slate-300 bg-slate-100 text-xs text-slate-500 dark:border-slate-600 dark:bg-[#383a3d] dark:text-slate-400 flex items-center justify-center md:w-[25%]">
+                <img 
+                  src={profileImg}
+                  alt="준의 프로필 사진"
+                  className="w-full h-full object-cover object-[center_20%]"
+                />
               </div>
 
               <div className="flex-1">
