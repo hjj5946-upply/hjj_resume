@@ -280,6 +280,8 @@ function App() {
                   src={profileImg}
                   alt="준의 프로필 사진"
                   className="w-full h-full object-cover object-[center_20%]"
+                  onContextMenu={(e) => e.preventDefault()}
+                  onDragStart={(e) => e.preventDefault()}
                 />
               </div>
 
