@@ -9,9 +9,9 @@ import {
   
   const data = [
     { name: "Backend", value: 97 },
-    { name: "Frontend", value: 83 },
-    { name: "Mobile", value: 52 },
-    { name: "Infra / DevOps", value: 72 },
+    { name: "Frontend", value: 70 },
+    { name: "Mobile", value: 55 },
+    { name: "Infra / DevOps", value: 75 },
   ];
   
   export function SkillChart() {
