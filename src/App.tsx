@@ -26,7 +26,7 @@ const PROJECTS = [
       "해외 구매대행·배송대행·역구매대행 서비스를 제공하는 커머스/물류 플랫폼을 제로베이스에서 설계·구축. 해외결제, 배송사 API 연동과 자체 물류 프로세스를 포함한 엔드투엔드 시스템.",
     techs: ["React", "Spring Boot", "JPA", "MySQL", "AWS", "Payment API", "Shipping API"],
     achievement: "월 평균 5,000+ 해외 주문 처리 및 실시간 배송 추적",
-    link: undefined,
+    link: "https://btorage.com",
   },
   {
     id: "vehicle-service",
@@ -96,6 +96,7 @@ const PROJECTS = [
       "노후 외주 WMS를 자체 솔루션으로 전환하여 재고 정확도 및 처리 성능을 개선.",
     techs: ["C#", "ASP.NET", "MSSQL", "WMS"],
     achievement: "재고 정확도 85% → 99% 개선, 처리 속도 2배 향상",
+    link: "http://assist-korea.co.kr/intro.php?userAgent=PC&",
   },
   {
     id: "abc-mart",
