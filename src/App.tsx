@@ -126,7 +126,7 @@ const PROJECTS = [
     description:
       "열화상 카메라 기반 체온 측정 및 출입 관리 태블릿 서비스.",
     techs: ["Python", "React", "MySQL", "Redis"],
-    achievement: "3개월 내 프로토타입 → 상용 서비스 론칭",
+    achievement: "1개월 내 프로토타입 → 상용 서비스 론칭",
   },
   {
     id: "jgamebox",
@@ -143,7 +143,7 @@ const PROJECTS = [
     description:
       "여성 패션 쇼핑몰을 위한 사용자 웹사이트 및 관리자 페이지를 1인 개발한 SaaS 형태의 서비스. 반응형 UI 기반으로 상품·주문·운영 관리 기능을 구현하고, Supabase를 활용한 데이터 관리 및 ECS 기반 배포 환경 구축.",
     techs: ["React", "Responsive Web", "Supabase", "ECS", "SaaS"],
-    achievement: "1인 풀스택 개발, 기획부터 배포까지 2개월 완성",
+    achievement: "1인 풀스택 개발, 기획부터 배포까지 3개월 완성",
     link: "https://elfin.co.kr",
   },
   {
@@ -424,7 +424,7 @@ function App() {
             </p>
 
             <div className="mt-4 space-y-5">
-              <ExperienceItem
+              {/* <ExperienceItem
                 period="2025-10 ~"
                 role="Backend Engineer"
                 org="WMS/WCS Core Automation Systems"
@@ -444,8 +444,8 @@ function App() {
                   "사내 직원 관리 및 운영 편의를 위한 내부 프로그램 개발",
                   "서비스 운영에 필요한 관리 기능 및 업무 자동화 도구 구축"
                 ]}
-              />
-              {/* <ExperienceItem
+              /> */}
+              <ExperienceItem
                 period="2025-10 ~"
                 role="Backend Engineer"
                 org="Commercial Vehicle Service & Parts System"
@@ -468,7 +468,7 @@ function App() {
                   "내부 운영을 위한 경량 WMS 형태의 재고 관리 시스템 구축 및 운영",
                   "안드로이드 앱 개발에 직접 참여하여 서비스 기능 구현 및 운영 지원"
                 ]}
-              /> */}
+              />
               <ExperienceItem
                 period="2017-06 ~ 2021-12 (4년 6개월)"
                 role="Web / Backend Engineer"
