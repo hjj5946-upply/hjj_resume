@@ -43,7 +43,7 @@ const PROJECTS = [
     description:
       "중소·대기업 물류센터에 납품되는 WMS/WCS 솔루션 개발. PAS/DAS/DPS, AGV, 로봇팔 등 자동화 설비 제어와 ERP/SAP 연동을 포함한 물류 코어 시스템.",
     techs: ["C#", "ASP.NET", "MSSQL", "WMS", "WCS", "AGV", "Robot"],
-    achievement: "대형 물류센터 5곳 납품, 일 평균 10,000+ 출고 처리",
+    achievement: "대형 물류센터 5곳 납품, 일 평균 20,000+ 출고 처리",
     link: undefined,
   },
   {
@@ -52,7 +52,7 @@ const PROJECTS = [
     description:
       "학원·학생·학부모를 연결하는 통합 관리 플랫폼. 학생용/관리자용 앱과 백엔드를 풀스택으로 설계·구현하고 실시간 위치, 알림, 관리 기능을 포함한 MVP 완성.",
     techs: ["Kotlin", "Jetpack Compose", "FastAPI", "PostgreSQL", "AWS", "React"],
-    achievement: "학원 5곳, 학생 500+ 명 관리 MVP 완성 및 운영",
+    achievement: "학원 3곳, 학생 100+ 명 관리 MVP 완성 및 운영",
     link: undefined,
   },
 
@@ -146,7 +146,7 @@ const PROJECTS = [
       "여성 패션 쇼핑몰을 위한 사용자 웹사이트 및 관리자 페이지를 1인 개발한 SaaS 형태의 서비스. 반응형 UI 기반으로 상품·주문·운영 관리 기능을 구현하고, Supabase를 활용한 데이터 관리 및 ECS 기반 배포 환경 구축.",
     techs: ["React", "Responsive Web", "Supabase", "ECS", "SaaS"],
     achievement: "1인 풀스택 개발, 기획부터 배포까지 3개월 완성",
-    link: "https://elfin.co.kr",
+    // link: "https://elfin.co.kr",
   },
   {
     id: "account",
