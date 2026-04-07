@@ -279,7 +279,7 @@ function App() {
               <div className="w-40 aspect-square flex-shrink-0 rounded-xl overflow-hidden border border-slate-300 bg-slate-100 text-xs text-slate-500 dark:border-slate-600 dark:bg-[#383a3d] dark:text-slate-400 flex items-center justify-center md:w-[25%]">
                 <img 
                   src={profileImg}
-                  alt="준의 프로필 사진"
+                  alt="실제 증명사진 기반 AI 생성 프로필 이미지"
                   className="w-full h-full object-cover object-[center_20%]"
                   onContextMenu={(e) => e.preventDefault()}
                   onDragStart={(e) => e.preventDefault()}
@@ -287,21 +287,18 @@ function App() {
               </div>
 
               <div className="flex-1">
-                {/* <p className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
-                  Portfolio
-                </p> */}
-
                 <h2 className="font-inter text-2xl font-semibold tracking-tight">
-                  8년차 풀스택 엔지니어, 준입니다.
+                  8년차 백엔드 중심 엔지니어, 준입니다.
                 </h2>
 
                 <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                  백엔드 개발을 중심으로 프론트엔드, 모바일까지 다루는 풀스택 개발자입니다.
-                  엔터프라이즈 시스템부터 소비자 서비스까지, 다양한 규모와 도메인의 제품을 만들어왔습니다.
+                  이커머스와 물류 도메인에서 시스템이 없는 상태에서 플랫폼을 설계·구축해왔으며,
+                  결제·배송 API와 물류 자동화(WMS/WCS)를 포함한 서비스를 실제 운영 가능한 수준으로 개발해왔습니다.
                 </p>
 
                 <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                  복잡한 요구사항을 명확한 구조로 풀어내고, 실제로 작동하는 시스템을 만드는 일에 집중합니다.
+                  Java(Spring), Python(FastAPI) 기반으로 백엔드를 중심으로 개발하며,
+                  필요 시 프론트엔드와 모바일까지 직접 구현해 서비스 전체 흐름을 완성합니다.
                 </p>
 
                 <div className="mt-4 flex flex-wrap gap-3 text-sm">
@@ -324,9 +321,11 @@ function App() {
           <section id="summary" className="mb-8">
             <SectionTitle>Summary</SectionTitle>
             <p className="mt-3 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
-              8년간 WMS/WCS, 커머스 플랫폼, 모바일 서비스 등 프로젝트를 제로베이스에서 설계·구축했습니다.
-              물류 자동화 설비 제어부터 해외 결제·배송 API 연동까지, 복잡한 도메인을 안정적으로 운영 가능한 시스템으로 구현합니다.
-              빠른 프로토타이핑으로 리스크를 줄이고, 데이터 기반으로 기술 스택과 구조를 최적화합니다.
+              해외 구매대행·배송대행 이커머스 플랫폼을 제로베이스에서 설계·구축하고, 
+              물류 시스템(WMS/WCS/SCM)은 실무 환경에서 개발·운영해온 백엔드 중심 엔지니어입니다.
+              Java(Spring), Python(FastAPI) 기반으로 결제·배송 API 연동부터 물류 자동화 설비까지 
+              복잡한 도메인을 실제 운영 가능한 시스템으로 구현해왔습니다.
+              또한 학원 모바일 서비스를 1인 풀스택으로 개발하며 서비스 전체 흐름을 직접 설계·구현한 경험을 보유하고 있습니다.
             </p>
           </section>
 
@@ -345,7 +344,7 @@ function App() {
                     "Java (Spring Boot)",
                     "Python (FastAPI)",
                     "C# (ASP.NET)",
-                    "RabbitMQ",
+                    // "RabbitMQ",
                     "Kafka",
                   ]}
                 />
@@ -354,14 +353,14 @@ function App() {
                   items={[
                     "React",
                     "TypeScript",
-                    "Vite",
-                    "Tailwind CSS",
+                    // "Vite",
+                    // "Tailwind CSS",
                     "GSAP",
                   ]}
                 />
                 <SkillRow
                   label="Mobile"
-                  items={["Android (Kotlin, Jetpack Compose)"]}
+                  items={["Android (Flutter(Dart))"]}
                 />
                 <SkillRow
                   label="Infra / DevOps"
@@ -370,6 +369,8 @@ function App() {
                     "Docker",
                     "Jenkins",
                     "CI/CD",
+                    "Vercel",
+                    "Firebase",
                   ]}
                 />
                 <SkillRow
@@ -377,8 +378,8 @@ function App() {
                   items={[
                     "PostgreSQL",
                     "MySQL",
-                    "MSSQL",
-                    "MariaDB",
+                    // "MSSQL",
+                    // "MariaDB",
                     "Redis",
                     "Supabase",
                   ]}
@@ -466,7 +467,7 @@ function App() {
                 ]}
               />
               <ExperienceItem
-                period="2022-01 ~ 2025-09 (3년 8개월)"
+                period="2022-07 ~ 2025-09 (3년 2개월)"
                 role="Backend Engineer / Full-Stack Engineer"
                 org="Overseas Commerce & Logistics Platform"
                 bullets={[
@@ -478,7 +479,7 @@ function App() {
                 ]}
               />
               <ExperienceItem
-                period="2017-06 ~ 2021-12 (4년 6개월)"
+                period="2017-06 ~ 2021-11 (4년 5개월)"
                 role="Web / Backend Engineer"
                 org="WMS/WCS Core Solution"
                 bullets={[

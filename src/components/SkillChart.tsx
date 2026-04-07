@@ -8,9 +8,9 @@ import {
   } from "recharts";
   
   const data = [
-    { name: "Backend", value: 97 },
-    { name: "Frontend", value: 70 },
-    { name: "Mobile", value: 55 },
+    { name: "Backend", value: 90 },
+    { name: "Frontend", value: 45 },
+    { name: "Mobile", value: 50 },
     { name: "Infra / DevOps", value: 75 },
   ];
   

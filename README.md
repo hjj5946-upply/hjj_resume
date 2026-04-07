@@ -31,7 +31,7 @@
 ### 다크 모드 지원
 - 시스템 테마 감지 후 자동 적용
 - 사용자가 직접 토글 가능  
-- 포인트 컬러(accent)는 다크 모드에서 시인성을 높여 별도 적용
+- 포인트 컬러는 다크 모드에서 시인성을 높여 별도 적용
 
 ### Skill Visualization
 - Backend / Frontend / Mobile / DevOps 등 기술 비중을 시각적인 Bar Chart로 표시
