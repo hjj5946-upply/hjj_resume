@@ -11,7 +11,7 @@ import {
   FiMoon,
   FiSun,
 } from "react-icons/fi";
-import { SiNotion } from "react-icons/si";
+// import { SiNotion } from "react-icons/si";
 
 type Theme = "light" | "dark";
 type View = "home" | "projects";
