@@ -211,13 +211,13 @@ function App() {
 
   const scrollToTop = () =>
     window.scrollTo({ top: 0, behavior: "smooth" });
-  
+
   return (
     <div className="min-h-screen bg-white text-slate-900 scroll-smooth transition-colors dark:bg-[#242526] dark:text-slate-50">
       {/* 상단 헤더 */}
       <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/80 backdrop-blur dark:border-slate-700 dark:bg-[#242526]/90">
         <div className="mx-auto flex max-w-3xl items-center justify-between px-4 h-14">
-    
+
           <div
             onClick={() => window.location.reload()}
             className="flex items-center cursor-pointer select-none"
@@ -229,7 +229,7 @@ function App() {
               <img
                 src={LogoImg}
                 alt="Logo"
-                className="max-h-16 w-auto object-contain" 
+                className="max-h-16 w-auto object-contain"
               />
             </button>
 
@@ -238,7 +238,7 @@ function App() {
                 Hong JeongJun
               </span>
               <span className="text-[11px] text-slate-500 dark:text-slate-400">
-                Full-Stack Software Engineer
+                BackEnd Software Engineer
               </span>
             </div>
           </div>
@@ -269,7 +269,7 @@ function App() {
         </div>
       </header>
 
-        {/* 메인 컨테이너 */}
+      {/* 메인 컨테이너 */}
       {view === "home" ? (
         <main className="mx-auto max-w-3xl px-4 pb-16 pt-8">
           {/* Hero / 이름 + 한줄소개 + 이미지 영역 */}
@@ -277,7 +277,7 @@ function App() {
             <div className="flex flex-col items-center gap-6 md:flex-row md:items-start">
               {/* 프로필 이미지 틀 */}
               <div className="w-40 aspect-square flex-shrink-0 rounded-xl overflow-hidden border border-slate-300 bg-slate-100 text-xs text-slate-500 dark:border-slate-600 dark:bg-[#383a3d] dark:text-slate-400 flex items-center justify-center md:w-[25%]">
-                <img 
+                <img
                   src={profileImg}
                   alt="실제 증명사진 기반 AI 생성 프로필 이미지"
                   className="w-full h-full object-cover object-[center_20%]"
@@ -288,30 +288,30 @@ function App() {
 
               <div className="flex-1">
                 <h2 className="font-inter text-2xl font-semibold tracking-tight">
-                  8년차 백엔드 중심 엔지니어, 준입니다.
+                  AI 제품을 빠르게 구현하는 엔지니어, 준입니다.
                 </h2>
 
                 <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                  이커머스와 물류 도메인에서 시스템이 없는 상태에서 플랫폼을 설계·구축해왔으며,
-                  결제·배송 API와 물류 자동화(WMS/WCS)를 포함한 서비스를 실제 운영 가능한 수준으로 개발해왔습니다.
+                  LLM과 자동화를 활용해 실제로 사용되는 서비스를 만드는 데 집중하고 있습니다.
+                  아이디어 단계부터 백엔드, 프론트엔드, AI 연동, 배포까지 직접 구현하며 빠른 실행과 개선을 중요하게 생각합니다.
                 </p>
 
                 <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                  Java(Spring), Python(FastAPI) 기반으로 백엔드를 중심으로 개발하며,
-                  필요 시 프론트엔드와 모바일까지 직접 구현해 서비스 전체 흐름을 완성합니다.
+                  Java(Spring), Python(FastAPI) 기반으로 개발하며,
+                  OpenAI API와 AI 워크플로우를 활용해 생산성과 사용자 경험을 동시에 개선하는 서비스를 구축합니다.
                 </p>
 
                 <div className="mt-4 flex flex-wrap gap-3 text-sm">
-                <a
-                  href="#projects"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToProjects();
-                  }}
-                  className="inline-flex items-center rounded-full border border-accent/70 bg-accent/90 px-4 py-1.5 text-sm font-medium text-white transition-colors duration-300 ease-out hover:bg-accent dark:border-accent-light/70 dark:bg-accent-light/90 dark:hover:bg-accent-light"
-                >
-                  프로젝트 보기
-                </a>
+                  <a
+                    href="#projects"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToProjects();
+                    }}
+                    className="inline-flex items-center rounded-full border border-accent/70 bg-accent/90 px-4 py-1.5 text-sm font-medium text-white transition-colors duration-300 ease-out hover:bg-accent dark:border-accent-light/70 dark:bg-accent-light/90 dark:hover:bg-accent-light"
+                  >
+                    프로젝트 보기
+                  </a>
                 </div>
               </div>
             </div>
@@ -320,12 +320,17 @@ function App() {
           {/* Summary */}
           <section id="summary" className="mb-8">
             <SectionTitle>Summary</SectionTitle>
+
             <p className="mt-3 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
-              해외 구매대행·배송대행 이커머스 플랫폼을 제로베이스에서 설계·구축하고, 
-              물류 시스템(WMS/WCS/SCM)은 실무 환경에서 개발·운영해온 백엔드 중심 엔지니어입니다.
-              Java(Spring), Python(FastAPI) 기반으로 결제·배송 API 연동부터 물류 자동화 설비까지 
-              복잡한 도메인을 실제 운영 가능한 시스템으로 구현해왔습니다.
-              또한 학원 모바일 서비스를 1인 풀스택으로 개발하며 서비스 전체 흐름을 직접 설계·구현한 경험을 보유하고 있습니다.
+              AI를 활용해 실제 사용되는 제품을 빠르게 만드는 개발자입니다.
+              단순 기능 구현보다 사용자 경험과 실행 속도를 중요하게 생각하며,
+              LLM·자동화·백엔드 시스템을 조합해 아이디어를 서비스로 연결하는 작업에 집중하고 있습니다.
+            </p>
+
+            <p className="mt-3 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+              Java(Spring), Python(FastAPI) 기반으로 개발하며,
+              OpenAI API와 다양한 AI 워크플로우를 활용해 서비스 자동화와 생산성 향상을 구현합니다.
+              백엔드를 중심으로 필요 시 프론트엔드와 모바일까지 직접 개발합니다.
             </p>
           </section>
 
@@ -433,7 +438,7 @@ function App() {
             </p>
 
             <div className="mt-4 space-y-5">
-              {/* <ExperienceItem
+              <ExperienceItem
                 period="2025-10 ~"
                 role="Backend Engineer"
                 org="WMS/WCS Core Automation Systems"
@@ -444,7 +449,7 @@ function App() {
                 ]}
               />
               <ExperienceItem
-                period="2022-01 ~ 2025-09"
+                period="2022-01 ~ 2025-09 (3년 8개월)"
                 role="Backend Engineer"
                 org="Game Embedded & Internal Core Systems"
                 bullets={[
@@ -453,8 +458,8 @@ function App() {
                   "사내 직원 관리 및 운영 편의를 위한 내부 프로그램 개발",
                   "서비스 운영에 필요한 관리 기능 및 업무 자동화 도구 구축"
                 ]}
-              /> */}
-              <ExperienceItem
+              />
+              {/* <ExperienceItem
                 period="2025-10 ~"
                 role="Backend Engineer"
                 org="Commercial Vehicle Service & Parts System"
@@ -467,7 +472,7 @@ function App() {
                 ]}
               />
               <ExperienceItem
-                period="2022-07 ~ 2025-09 (3년 2개월)"
+                period="2022-02 ~ 2025-09 (3년 7개월)"
                 role="Backend Engineer / Full-Stack Engineer"
                 org="Overseas Commerce & Logistics Platform"
                 bullets={[
@@ -477,9 +482,9 @@ function App() {
                   "내부 운영을 위한 경량 WMS 형태의 재고 관리 시스템 구축 및 운영",
                   "안드로이드 앱 개발에 직접 참여하여 서비스 기능 구현 및 운영 지원"
                 ]}
-              />
+              /> */}
               <ExperienceItem
-                period="2017-06 ~ 2021-11 (4년 5개월)"
+                period="2017-12 ~ 2021-11 (3년 9개월)"
                 role="Web / Backend Engineer"
                 org="WMS/WCS Core Solution"
                 bullets={[
@@ -720,13 +725,13 @@ function Footer() {
         </a>
 
         {/* Notion */}
-        <a
+        {/* <a
           href="https://your-notion-url"
           target="_blank"
           className="transition-colors duration-300 ease-out hover:text-accent dark:hover:text-accent-light"
         >
           <SiNotion />
-        </a>
+        </a> */}
 
         {/* Email */}
         <a
