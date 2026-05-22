@@ -438,7 +438,7 @@ function App() {
             </p>
 
             <div className="mt-4 space-y-5">
-              <ExperienceItem
+              {/* <ExperienceItem
                 period="2025-10 ~"
                 role="Backend Engineer"
                 org="WMS/WCS Core Automation Systems"
@@ -458,8 +458,8 @@ function App() {
                   "사내 직원 관리 및 운영 편의를 위한 내부 프로그램 개발",
                   "서비스 운영에 필요한 관리 기능 및 업무 자동화 도구 구축"
                 ]}
-              />
-              {/* <ExperienceItem
+              /> */}
+              <ExperienceItem
                 period="2025-10 ~"
                 role="Backend Engineer"
                 org="Commercial Vehicle Service & Parts System"
@@ -472,7 +472,7 @@ function App() {
                 ]}
               />
               <ExperienceItem
-                period="2022-02 ~ 2025-09 (3년 7개월)"
+                period="2022-01 ~ 2025-09 (3년 8개월)"
                 role="Backend Engineer / Full-Stack Engineer"
                 org="Overseas Commerce & Logistics Platform"
                 bullets={[
@@ -482,9 +482,9 @@ function App() {
                   "내부 운영을 위한 경량 WMS 형태의 재고 관리 시스템 구축 및 운영",
                   "안드로이드 앱 개발에 직접 참여하여 서비스 기능 구현 및 운영 지원"
                 ]}
-              /> */}
+              />
               <ExperienceItem
-                period="2017-12 ~ 2021-11 (3년 9개월)"
+                period="2018-01 ~ 2021-11 (3년 10개월)"
                 role="Web / Backend Engineer"
                 org="WMS/WCS Core Solution"
                 bullets={[
