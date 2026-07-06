@@ -19,7 +19,7 @@ export function SkillChart() {
   return (
     <div className={`h-56 w-full p-3 text-xs ${CARD_SURFACE_CLASS}`}>
       <p className="mb-2 text-[11px] font-semibold text-slate-500 dark:text-slate-300">
-        Tech Focus
+        Tech Focus (비중)
       </p>
       <ResponsiveContainer width="100%" height={180}>
         <BarChart
