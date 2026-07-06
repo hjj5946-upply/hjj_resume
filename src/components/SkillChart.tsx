@@ -6,6 +6,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { CARD_SURFACE_CLASS } from "../lib/ui";
 
 const data = [
   { name: "Backend", value: 90 },
@@ -14,19 +15,9 @@ const data = [
   { name: "Infra / DevOps", value: 75 },
 ];
 
-import { useState, useEffect } from "react";
-
 export function SkillChart() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
-
   return (
-    <div className="h-56 w-full rounded-xl border border-slate-200 bg-slate-50 p-3 text-xs dark:border-slate-600 dark:bg-[#383a3d]">
+    <div className={`h-56 w-full p-3 text-xs ${CARD_SURFACE_CLASS}`}>
       <p className="mb-2 text-[11px] font-semibold text-slate-500 dark:text-slate-300">
         Tech Focus (비중)
       </p>

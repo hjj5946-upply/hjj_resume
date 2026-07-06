@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { SkillChart } from "./components/SkillChart.tsx";
+import { CARD_SURFACE_CLASS } from "./lib/ui.ts";
+import type { PlanetId } from "./spicy/planets.config.ts";
 import LogoImg from "/android-icon-192x192.png";
 import profileImg from '../public/profile_img.jpg';
 
@@ -8,13 +10,26 @@ import {
   FiInstagram,
   FiMail,
   FiArrowUp,
-  FiMoon,
-  FiSun,
+  FiHome,
 } from "react-icons/fi";
+import { TbRobotFace } from "react-icons/tb";
 // import { SiNotion } from "react-icons/si";
 
 type Theme = "light" | "dark";
 type View = "home" | "projects";
+
+// three.js/gsap 등 무거운 의존성은 매운맛 모드로 전환할 때만 필요하므로 별도 청크로 분리한다.
+const SpicyUniverse = lazy(() =>
+  import("./spicy/SpicyUniverse.tsx").then((m) => ({ default: m.SpicyUniverse }))
+);
+
+function SpicyUniverseFallback() {
+  return (
+    <div className="fixed inset-x-0 bottom-0 top-14 z-0 flex items-center justify-center bg-[#05040f] text-sm text-slate-300">
+      우주로 이동하는 중...
+    </div>
+  );
+}
 
 const PROJECTS = [
 
@@ -159,25 +174,23 @@ const PROJECTS = [
   },
 ];
 
+function getInitialTheme(): Theme {
+  if (typeof window === "undefined") return "light";
+
+  const stored = window.localStorage.getItem("theme") as Theme | null;
+  const prefersDark = window.matchMedia?.(
+    "(prefers-color-scheme: dark)"
+  ).matches;
+
+  return stored ?? (prefersDark ? "dark" : "light");
+}
+
 function App() {
-  const [theme, setTheme] = useState<Theme>("light");
+  // index.html의 인라인 스크립트가 이미 <html>에 dark 클래스를 선반영해두므로,
+  // 여기서도 첫 렌더부터 같은 값을 읽어야 라이트→다크 깜빡임이 생기지 않는다.
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [view, setView] = useState<View>("home");
-
-  // 초기 테마 로드
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const stored = window.localStorage.getItem("theme") as Theme | null;
-    const prefersDark = window.matchMedia?.(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-
-    const initialTheme: Theme =
-      stored ?? (prefersDark ? "dark" : "light");
-
-    setTheme(initialTheme);
-  }, []);
 
   // html에 dark 클래스 적용 + localStorage 저장
   useEffect(() => {
@@ -211,6 +224,16 @@ function App() {
 
   const scrollToTop = () =>
     window.scrollTo({ top: 0, behavior: "smooth" });
+
+  const sectionContent: Record<PlanetId, React.ReactNode> = {
+    summary: <SummarySection />,
+    skills: <SkillsSection />,
+    experience: <ExperienceSection />,
+    projects: <ProjectsSection onShowAll={() => setView("projects")} />,
+    contact: <ContactSection />,
+  };
+
+  const isSpicyUniverseActive = theme === "dark" && view === "home";
 
   return (
     <div className="min-h-screen bg-white text-slate-900 scroll-smooth transition-colors dark:bg-[#242526] dark:text-slate-50">
@@ -253,16 +276,17 @@ function App() {
               <NavLink href="#contact" label="Contact" />
             </nav>
 
-            {/* 다크모드 토글: 아이콘만 */}
+            {/* 순한맛/매운맛 토글: 아이콘만 */}
             <button
               onClick={toggleTheme}
-              aria-label="Toggle theme"
+              aria-label={theme === "dark" ? "순한맛으로 전환" : "매운맛으로 전환"}
+              title={theme === "dark" ? "순한맛으로 전환" : "매운맛으로 전환"}
               className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-700 shadow-sm transition hover:border-slate-400 hover:-translate-y-0.5 hover:shadow-md dark:border-slate-600 dark:bg-[#383a3d] dark:text-slate-100"
             >
               {theme === "dark" ? (
-                <FiSun className="h-4 w-4" />
+                <FiHome className="h-4 w-4" />
               ) : (
-                <FiMoon className="h-4 w-4" />
+                <TbRobotFace className="h-4 w-4" />
               )}
             </button>
           </div>
@@ -270,7 +294,15 @@ function App() {
       </header>
 
       {/* 메인 컨테이너 */}
-      {view === "home" ? (
+      {view === "projects" ? (
+        <main className="mx-auto max-w-3xl px-4 pb-16 pt-8">
+          <ProjectsPage onBack={() => setView("home")} />
+        </main>
+      ) : theme === "dark" ? (
+        <Suspense fallback={<SpicyUniverseFallback />}>
+          <SpicyUniverse sectionContent={sectionContent} />
+        </Suspense>
+      ) : (
         <main className="mx-auto max-w-3xl px-4 pb-16 pt-8">
           {/* Hero / 이름 + 한줄소개 + 이미지 영역 */}
           <section className="mb-8 border-b border-slate-200 pb-6 dark:border-slate-700">
@@ -319,19 +351,7 @@ function App() {
 
           {/* Summary */}
           <section id="summary" className="mb-8">
-            <SectionTitle>Summary</SectionTitle>
-
-            <p className="mt-3 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
-              AI를 활용해 실제 사용되는 제품을 빠르게 만드는 개발자입니다.
-              단순 기능 구현보다 사용자 경험과 실행 속도를 중요하게 생각하며,
-              LLM·자동화·백엔드 시스템을 조합해 아이디어를 서비스로 연결하는 작업에 집중하고 있습니다.
-            </p>
-
-            <p className="mt-3 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
-              Java(Spring), Python(FastAPI) 기반으로 개발하며,
-              OpenAI API와 다양한 AI 워크플로우를 활용해 서비스 자동화와 생산성 향상을 구현합니다.
-              백엔드를 중심으로 필요 시 프론트엔드와 모바일까지 직접 개발합니다.
-            </p>
+            <SummarySection />
           </section>
 
           {/* Skills */}
@@ -339,91 +359,7 @@ function App() {
             id="skills"
             className="mb-8 border-t border-slate-200 pt-6 dark:border-slate-700"
           >
-            <SectionTitle>Skills</SectionTitle>
-
-            <div className="mt-4 space-y-5 text-sm">
-              <div className="mt-4 space-y-4 text-sm">
-                <SkillRow
-                  label="Backend / API"
-                  items={[
-                    "Java (Spring Boot)",
-                    "Python (FastAPI)",
-                    "C# (ASP.NET)",
-                    // "RabbitMQ",
-                    "Kafka",
-                  ]}
-                />
-                <SkillRow
-                  label="Frontend / UI"
-                  items={[
-                    "React",
-                    "TypeScript",
-                    // "Vite",
-                    // "Tailwind CSS",
-                    "GSAP",
-                  ]}
-                />
-                <SkillRow
-                  label="Mobile"
-                  items={["Android (Flutter(Dart))"]}
-                />
-                <SkillRow
-                  label="Infra / DevOps"
-                  items={[
-                    "AWS (EC2/RDS)",
-                    "Docker",
-                    "Jenkins",
-                    "CI/CD",
-                    "Vercel",
-                    "Firebase",
-                  ]}
-                />
-                <SkillRow
-                  label="Data / Storage"
-                  items={[
-                    "PostgreSQL",
-                    "MySQL",
-                    // "MSSQL",
-                    // "MariaDB",
-                    "Redis",
-                    "Supabase",
-                  ]}
-                />
-              </div>
-
-              {/* 아래: Tech 비중 차트 카드 */}
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-xs shadow-sm dark:border-slate-600 dark:bg-[#383a3d]">
-                <div className="flex items-baseline justify-between gap-3">
-                  <p className="font-semibold text-slate-700 dark:text-slate-100">
-                    Tech Proficiency Overview
-                  </p>
-                  <p className="text-[11px] text-slate-500 dark:text-slate-300">
-                    상대적인 비중 / 활용도 기준 (0–100)
-                  </p>
-                </div>
-
-                {/* 범례(카테고리) */}
-                <div className="mt-2 flex flex-wrap gap-1.5 text-[11px] text-slate-500 dark:text-slate-300">
-                  <span className="rounded-full border border-slate-200 px-2 py-0.5 dark:border-slate-500">
-                    Backend
-                  </span>
-                  <span className="rounded-full border border-slate-200 px-2 py-0.5 dark:border-slate-500">
-                    Frontend
-                  </span>
-                  <span className="rounded-full border border-slate-200 px-2 py-0.5 dark:border-slate-500">
-                    Mobile
-                  </span>
-                  <span className="rounded-full border border-slate-200 px-2 py-0.5 dark:border-slate-500">
-                    Infra / DevOps
-                  </span>
-                </div>
-
-                {/* 차트 영역 */}
-                <div className="mt-3 h-64">
-                  <SkillChart />
-                </div>
-              </div>
-            </div>
+            <SkillsSection />
           </section>
 
           {/* Experience */}
@@ -431,71 +367,7 @@ function App() {
             id="experience"
             className="mb-8 border-t border-slate-200 pt-6 dark:border-slate-700"
           >
-            <SectionTitle>Experience</SectionTitle>
-
-            <p className="mt-3 text-sm text-slate-700 dark:text-slate-300">
-              다년간 수행한 역할과 책임 중심으로 정리했습니다.
-            </p>
-
-            <div className="mt-4 space-y-5">
-              {/* <ExperienceItem
-                period="2025-10 ~"
-                role="Backend Engineer"
-                org="WMS/WCS Core Automation Systems"
-                bullets={[
-                  "중장비 물류 환경을 위한 재고 관리 시스템 및 WCS 코어 제어 시스템 운영·관리",
-                  "WCS 기반 설비 제어 로직 및 로봇 제어 시스템 유지보수 및 안정화",
-                  "물류 자동화 설비와 연계된 내부 코어 시스템 관리 및 운영 지원"
-                ]}
-              />
-              <ExperienceItem
-                period="2022-01 ~ 2025-09 (3년 8개월)"
-                role="Backend Engineer"
-                org="Game Embedded & Internal Core Systems"
-                bullets={[
-                  "게임 서비스 운영을 위한 사내 내부 코어 시스템 및 관리 도구 개발",
-                  "게임 데이터 기반 정산 시스템 및 운영 지원 백엔드 로직 구현",
-                  "사내 직원 관리 및 운영 편의를 위한 내부 프로그램 개발",
-                  "서비스 운영에 필요한 관리 기능 및 업무 자동화 도구 구축"
-                ]}
-              /> */}
-              <ExperienceItem
-                period="2025-10 ~"
-                role="Backend Engineer"
-                org="Commercial Vehicle Service & Parts System"
-                bullets={[
-                  "벤츠트럭(BENZ Truck), MAN 트럭 등 상용차 제조사의 직영·대리점 서비스 정비센터를 위한 정비 시스템 구축 및 운영",
-                  "차량 입고부터 PDI, 정비 이력 관리까지 정비 전 과정을 관리하는 백엔드 시스템 설계·구현",
-                  "정비 시스템 내 SAP 연동을 통한 부품, 비용, 환율 기반 관리 로직 개발",
-                  "차량 부품 WMS 시스템 구축 및 재고 흐름 관리 기능 구현",
-                  "운영 중인 상용 시스템의 유지보수 및 안정화 작업 수행"
-                ]}
-              />
-              <ExperienceItem
-                period="2022-01 ~ 2025-09 (3년 8개월)"
-                role="Backend Engineer / Full-Stack Engineer"
-                org="Overseas Commerce & Logistics Platform"
-                bullets={[
-                  "해외 구매대행·배송대행·역구매대행 서비스를 제공하는 커머스/물류 플랫폼을 백지 상태에서 설계·구축",
-                  "해외 결제 API, 배송사 API 연동을 포함한 주문·결제·배송 전체 흐름의 백엔드 시스템 개발",
-                  "외부 쇼핑몰이 자사 API 버튼을 통해 구매대행 및 장바구니 기능을 사용할 수 있는 연동 구조 설계",
-                  "내부 운영을 위한 경량 WMS 형태의 재고 관리 시스템 구축 및 운영",
-                  "안드로이드 앱 개발에 직접 참여하여 서비스 기능 구현 및 운영 지원"
-                ]}
-              />
-              <ExperienceItem
-                period="2018-01 ~ 2021-11 (3년 10개월)"
-                role="Web / Backend Engineer"
-                org="WMS/WCS Core Solution"
-                bullets={[
-                  "중소·대기업 및 화주사 물류센터에 납품되는 WMS 솔루션 설계·개발 및 유지보수",
-                  "PAS/DAS/DPS 등 WCS 피킹·분배 시스템 구현 및 설비 제어 로직 개발, 현장 연동 및 안정화",
-                  "AGV, 로봇팔 등 자동화 설비와 연계된 물류 프로세스 구축 및 운영 지원",
-                  "ERP·SAP 등 외부 시스템과의 데이터 연동 및 인터페이스 개발",
-                  "내부 SCM 물류 포털 및 MES 시스템 개발·운영"
-                ]}
-              />
-            </div>
+            <ExperienceSection />
           </section>
 
           {/* Projects */}
@@ -503,35 +375,7 @@ function App() {
             id="projects"
             className="mb-8 border-t border-slate-200 pt-6 dark:border-slate-700"
           >
-            <SectionTitle>Projects</SectionTitle>
-            <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
-              최근에 집중해서 만들었던 프로젝트 몇 가지를 정리했습니다.
-            </p>
-
-            {/* 상위 4개만 노출 */}
-            <div className="mt-4 grid gap-4 md:grid-cols-2">
-              {PROJECTS.slice(0, 4).map((project) => (
-                <ProjectCard
-                  key={project.id}
-                  name={project.name}
-                  description={project.description}
-                  techs={project.techs}
-                  achievement={project.achievement}
-                  link={project.link}
-                />
-              ))}
-            </div>
-
-            {/* 전체 보기 버튼 */}
-            <div className="mt-4 flex justify-end">
-              <button
-                type="button"
-                onClick={() => setView("projects")}
-                className="text-xs font-medium text-slate-600 underline-offset-4 hover:underline dark:text-slate-200"
-              >
-                전체 프로젝트 보기 →
-              </button>
-            </div>
+            <ProjectsSection onShowAll={() => setView("projects")} />
           </section>
 
           {/* Contact */}
@@ -539,25 +383,19 @@ function App() {
             id="contact"
             className="border-t border-slate-200 pt-6 dark:border-slate-700"
           >
-            <SectionTitle>Contact</SectionTitle>
-            <p className="mt-3 text-sm text-slate-700 dark:text-slate-300">
-              협업 제안, 문의, 기타 연락은 아래 채널로 부탁드립니다.
-            </p>
-            <div className="mt-3 space-y-1 text-sm">
-              <p>Email: hjj5946@gmail.com</p>
-            </div>
+            <ContactSection />
           </section>
-        </main>
-      ) : (
-        <main className="mx-auto max-w-3xl px-4 pb-16 pt-8">
-          <ProjectsPage onBack={() => setView("home")} />
         </main>
       )}
 
-      {/* 우측 하단 스크롤 위로 버튼 */}
-      <ScrollToTopButton visible={showScrollTop} onClick={scrollToTop} />
+      {!isSpicyUniverseActive && (
+        <>
+          {/* 우측 하단 스크롤 위로 버튼 */}
+          <ScrollToTopButton visible={showScrollTop} onClick={scrollToTop} />
 
-      <Footer />
+          <Footer />
+        </>
+      )}
     </div>
   );
 }
@@ -585,6 +423,218 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
         {children}
       </h2>
     </div>
+  );
+}
+
+function SummarySection() {
+  return (
+    <>
+      <SectionTitle>Summary</SectionTitle>
+
+      <p className="mt-3 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+        AI를 활용해 실제 사용되는 제품을 빠르게 만드는 개발자입니다.
+        단순 기능 구현보다 사용자 경험과 실행 속도를 중요하게 생각하며,
+        LLM·자동화·백엔드 시스템을 조합해 아이디어를 서비스로 연결하는 작업에 집중하고 있습니다.
+      </p>
+
+      <p className="mt-3 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+        Java(Spring), Python(FastAPI) 기반으로 개발하며,
+        OpenAI API와 다양한 AI 워크플로우를 활용해 서비스 자동화와 생산성 향상을 구현합니다.
+        백엔드를 중심으로 필요 시 프론트엔드와 모바일까지 직접 개발합니다.
+      </p>
+    </>
+  );
+}
+
+function SkillsSection() {
+  return (
+    <>
+      <SectionTitle>Skills</SectionTitle>
+
+      <div className="mt-4 space-y-5 text-sm">
+        <div className="mt-4 space-y-4 text-sm">
+          <SkillRow
+            label="Backend / API"
+            items={[
+              "Java (Spring Boot)",
+              "Python (FastAPI)",
+              "C# (ASP.NET)",
+              // "RabbitMQ",
+              "Kafka",
+            ]}
+          />
+          <SkillRow
+            label="Frontend / UI"
+            items={[
+              "React",
+              "TypeScript",
+              // "Vite",
+              // "Tailwind CSS",
+              "GSAP",
+            ]}
+          />
+          <SkillRow label="Mobile" items={["Android (Flutter(Dart))"]} />
+          <SkillRow
+            label="Infra / DevOps"
+            items={[
+              "AWS (EC2/RDS)",
+              "Docker",
+              "Jenkins",
+              "CI/CD",
+              "Vercel",
+              "Firebase",
+            ]}
+          />
+          <SkillRow
+            label="Data / Storage"
+            items={[
+              "PostgreSQL",
+              "MySQL",
+              // "MSSQL",
+              // "MariaDB",
+              "Redis",
+              "Supabase",
+            ]}
+          />
+        </div>
+
+        {/* 아래: Tech 비중 차트 카드 */}
+        <div className={`p-4 text-xs ${CARD_SURFACE_CLASS}`}>
+          <div className="flex items-baseline justify-between gap-3">
+            <p className="font-semibold text-slate-700 dark:text-slate-100">
+              Tech Proficiency Overview
+            </p>
+            <p className="text-[11px] text-slate-500 dark:text-slate-300">
+              상대적인 비중 / 활용도 기준 (0–100)
+            </p>
+          </div>
+
+          {/* 범례(카테고리) */}
+          <div className="mt-2 flex flex-wrap gap-1.5 text-[11px] text-slate-500 dark:text-slate-300">
+            <span className="rounded-full border border-slate-200 px-2 py-0.5 dark:border-slate-500">
+              Backend
+            </span>
+            <span className="rounded-full border border-slate-200 px-2 py-0.5 dark:border-slate-500">
+              Frontend
+            </span>
+            <span className="rounded-full border border-slate-200 px-2 py-0.5 dark:border-slate-500">
+              Mobile
+            </span>
+            <span className="rounded-full border border-slate-200 px-2 py-0.5 dark:border-slate-500">
+              Infra / DevOps
+            </span>
+          </div>
+
+          {/* 차트 영역 */}
+          <div className="mt-3 h-64">
+            <SkillChart />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+function ExperienceSection() {
+  return (
+    <>
+      <SectionTitle>Experience</SectionTitle>
+
+      <p className="mt-3 text-sm text-slate-700 dark:text-slate-300">
+        다년간 수행한 역할과 책임 중심으로 정리했습니다.
+      </p>
+
+      <div className="mt-4 space-y-5">
+        <ExperienceItem
+          period="2025-10 ~"
+          role="Backend Engineer"
+          org="Commercial Vehicle Service & Parts System"
+          bullets={[
+            "벤츠트럭(BENZ Truck), MAN 트럭 등 상용차 제조사의 직영·대리점 서비스 정비센터를 위한 정비 시스템 구축 및 운영",
+            "차량 입고부터 PDI, 정비 이력 관리까지 정비 전 과정을 관리하는 백엔드 시스템 설계·구현",
+            "정비 시스템 내 SAP 연동을 통한 부품, 비용, 환율 기반 관리 로직 개발",
+            "차량 부품 WMS 시스템 구축 및 재고 흐름 관리 기능 구현",
+            "운영 중인 상용 시스템의 유지보수 및 안정화 작업 수행",
+          ]}
+        />
+        <ExperienceItem
+          period="2022-01 ~ 2025-09 (3년 8개월)"
+          role="Backend Engineer / Full-Stack Engineer"
+          org="Overseas Commerce & Logistics Platform"
+          bullets={[
+            "해외 구매대행·배송대행·역구매대행 서비스를 제공하는 커머스/물류 플랫폼을 백지 상태에서 설계·구축",
+            "해외 결제 API, 배송사 API 연동을 포함한 주문·결제·배송 전체 흐름의 백엔드 시스템 개발",
+            "외부 쇼핑몰이 자사 API 버튼을 통해 구매대행 및 장바구니 기능을 사용할 수 있는 연동 구조 설계",
+            "내부 운영을 위한 경량 WMS 형태의 재고 관리 시스템 구축 및 운영",
+            "안드로이드 앱 개발에 직접 참여하여 서비스 기능 구현 및 운영 지원",
+          ]}
+        />
+        <ExperienceItem
+          period="2018-01 ~ 2021-11 (3년 10개월)"
+          role="Web / Backend Engineer"
+          org="WMS/WCS Core Solution"
+          bullets={[
+            "중소·대기업 및 화주사 물류센터에 납품되는 WMS 솔루션 설계·개발 및 유지보수",
+            "PAS/DAS/DPS 등 WCS 피킹·분배 시스템 구현 및 설비 제어 로직 개발, 현장 연동 및 안정화",
+            "AGV, 로봇팔 등 자동화 설비와 연계된 물류 프로세스 구축 및 운영 지원",
+            "ERP·SAP 등 외부 시스템과의 데이터 연동 및 인터페이스 개발",
+            "내부 SCM 물류 포털 및 MES 시스템 개발·운영",
+          ]}
+        />
+      </div>
+    </>
+  );
+}
+
+type ProjectsSectionProps = { onShowAll: () => void };
+
+function ProjectsSection({ onShowAll }: ProjectsSectionProps) {
+  return (
+    <>
+      <SectionTitle>Projects</SectionTitle>
+      <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
+        최근에 집중해서 만들었던 프로젝트 몇 가지를 정리했습니다.
+      </p>
+
+      {/* 상위 4개만 노출 */}
+      <div className="mt-4 grid gap-4 md:grid-cols-2">
+        {PROJECTS.slice(0, 4).map((project) => (
+          <ProjectCard
+            key={project.id}
+            name={project.name}
+            description={project.description}
+            techs={project.techs}
+            achievement={project.achievement}
+            link={project.link}
+          />
+        ))}
+      </div>
+
+      {/* 전체 보기 버튼 */}
+      <div className="mt-4 flex justify-end">
+        <button
+          type="button"
+          onClick={onShowAll}
+          className="text-xs font-medium text-slate-600 underline-offset-4 hover:underline dark:text-slate-200"
+        >
+          전체 프로젝트 보기 →
+        </button>
+      </div>
+    </>
+  );
+}
+
+function ContactSection() {
+  return (
+    <>
+      <SectionTitle>Contact</SectionTitle>
+      <p className="mt-3 text-sm text-slate-700 dark:text-slate-300">
+        협업 제안, 문의, 기타 연락은 아래 채널로 부탁드립니다.
+      </p>
+      <div className="mt-3 space-y-1 text-sm">
+        <p>Email: hjj5946@gmail.com</p>
+      </div>
+    </>
   );
 }
 
@@ -619,7 +669,7 @@ type ExperienceItemProps = {
 
 function ExperienceItem({ period, role, org, bullets }: ExperienceItemProps) {
   return (
-    <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm shadow-sm dark:border-slate-600 dark:bg-[#383a3d]">
+    <div className={`p-4 text-sm ${CARD_SURFACE_CLASS}`}>
       <p className="text-xs text-slate-500 dark:text-slate-300">{period}</p>
       <p className="mt-1 font-semibold text-slate-900 dark:text-slate-50">
         {role} · {org}
@@ -643,7 +693,7 @@ type ProjectCardProps = {
 
 function ProjectCard({ name, description, techs, achievement, link }: ProjectCardProps) {
   return (
-    <article className="flex h-full flex-col rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm shadow-sm dark:border-slate-600 dark:bg-[#383a3d]">
+    <article className={`flex h-full flex-col p-4 text-sm ${CARD_SURFACE_CLASS}`}>
       <h3 className="font-inter text-sm font-semibold text-slate-900 dark:text-slate-50">
         {name}
       </h3>
