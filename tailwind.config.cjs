@@ -11,14 +11,12 @@ module.exports = {
         accent: {
           DEFAULT: "#de9b2f",
           light: "#f5ba3b",
-          // DEFAULT: "#cc1231",
-          // light: "#f03252",
         },
       },
       fontFamily: {
-        sans: ["Pretendard", "Inter", "ui-sans-serif", "system-ui"],
-        inter: ["Inter", "ui-sans-serif", "system-ui"],
-        pre: ["Pretendard", "ui-sans-serif", "system-ui"],
+        // 폰트 파일은 index.html에서 로드한다 (Pretendard: 동적 서브셋, Inter: 600 weight만)
+        sans: ["Pretendard Variable", "Pretendard", "ui-sans-serif", "system-ui"],
+        inter: ["Inter", "Pretendard Variable", "ui-sans-serif", "system-ui"],
       },
     },
   },

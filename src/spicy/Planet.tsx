@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { memo, useEffect, useMemo, useRef, useState } from "react";
 import { useFrame, useThree, type ThreeEvent } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
 import * as THREE from "three";
-import type { PlanetConfig } from "./planets.config";
-import { getOrbitPosition } from "./orbit";
+import type { PlanetConfig, PlanetId } from "./planets.config";
+import { getOrbitPosition, setOrbitPosition } from "./orbit";
 import { createCyberSurfaceTexture } from "./textures";
 import { NeutronCore } from "./NeutronCore";
 import { ReactOrbitCore } from "./ReactOrbitCore";
@@ -15,10 +15,17 @@ type PlanetProps = {
   dimmed: boolean;
   showLabel: boolean;
   frozenPosition: [number, number, number] | null;
-  onSelect: (position: [number, number, number]) => void;
+  onSelect: (id: PlanetId, position: [number, number, number]) => void;
 };
 
-export function Planet({ config, dimmed, showLabel, frozenPosition, onSelect }: PlanetProps) {
+// 부모(SpicyUniverse)가 선택 상태만 바뀌어도 리렌더되므로, props가 같은 행성은 건너뛴다.
+export const Planet = memo(function Planet({
+  config,
+  dimmed,
+  showLabel,
+  frozenPosition,
+  onSelect,
+}: PlanetProps) {
   const { clock } = useThree();
   const groupRef = useRef<THREE.Group>(null);
   const sphereRef = useRef<THREE.Mesh>(null);
@@ -29,12 +36,20 @@ export function Planet({ config, dimmed, showLabel, frozenPosition, onSelect }: 
   const isReactOrbit = visualStyle === "react-orbit";
   const isGlow = visualStyle === "glow";
   const isCrystal = visualStyle === "crystal";
+  const isCyber = visualStyle === "cyber";
   const usesCustomCore = isNeutron || isReactOrbit || isGlow;
 
+  // 표면 텍스처는 cyber 스타일에서만 쓰므로 나머지 행성은 만들지 않는다.
   const surfaceTexture = useMemo(
-    () => createCyberSurfaceTexture(config.color, config.accentColor, config.textureSeed),
-    [config.color, config.accentColor, config.textureSeed]
+    () =>
+      isCyber
+        ? createCyberSurfaceTexture(config.color, config.accentColor, config.textureSeed)
+        : null,
+    [isCyber, config.color, config.accentColor, config.textureSeed]
   );
+
+  // material.dispose()는 map 텍스처까지 해제하지 않으므로 직접 정리한다.
+  useEffect(() => () => surfaceTexture?.dispose(), [surfaceTexture]);
 
   useFrame(() => {
     const group = groupRef.current;
@@ -43,8 +58,7 @@ export function Planet({ config, dimmed, showLabel, frozenPosition, onSelect }: 
     if (frozenPosition) {
       group.position.set(...frozenPosition);
     } else {
-      const t = clock.getElapsedTime();
-      group.position.set(...getOrbitPosition(config, t));
+      setOrbitPosition(config, clock.getElapsedTime(), group.position);
     }
 
     if (sphereRef.current) {
@@ -53,14 +67,15 @@ export function Planet({ config, dimmed, showLabel, frozenPosition, onSelect }: 
 
     // 표면 위를 은은하게 흐르는 스캔라인. three.js 텍스처는 리렌더 없이
     // useFrame에서 offset을 직접 mutate하는 게 표준 애니메이션 방식이라 오탐이다.
-    // eslint-disable-next-line react-hooks/immutability
-    surfaceTexture.offset.y = (clock.getElapsedTime() * 0.03) % 1;
+    if (surfaceTexture) {
+      // eslint-disable-next-line react-hooks/immutability
+      surfaceTexture.offset.y = (clock.getElapsedTime() * 0.03) % 1;
+    }
   });
 
   const handleClick = (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
-    const t = clock.getElapsedTime();
-    onSelect(getOrbitPosition(config, t));
+    onSelect(config.id, getOrbitPosition(config, clock.getElapsedTime()));
   };
 
   const handlePointerOver = (e: ThreeEvent<PointerEvent>) => {
@@ -93,11 +108,18 @@ export function Planet({ config, dimmed, showLabel, frozenPosition, onSelect }: 
         onPointerOver={handlePointerOver}
         onPointerOut={handlePointerOut}
       >
-        {isCrystal ? <icosahedronGeometry args={[1, 1]} /> : <sphereGeometry args={[1, 48, 48]} />}
+        {isCrystal ? (
+          <icosahedronGeometry args={[1, 1]} />
+        ) : usesCustomCore ? (
+          <sphereGeometry args={[1, 16, 16]} />
+        ) : (
+          <sphereGeometry args={[1, 48, 48]} />
+        )}
         {usesCustomCore ? (
           // 커스텀 코어 스타일(중성자별/리액트 궤도/발광 비콘)은 별도 컴포넌트가 시각적으로
-          // 그려주므로, 여기서는 클릭/호버 판정을 위한 투명한 히트 영역만 유지한다.
-          <meshBasicMaterial transparent opacity={0} depthWrite={false} />
+          // 그려주므로, 여기서는 클릭/호버 판정용 히트 영역만 둔다.
+          // material.visible=false면 렌더링(draw call)은 건너뛰고 레이캐스트는 그대로 동작한다.
+          <meshBasicMaterial visible={false} />
         ) : isCrystal ? (
           <meshPhysicalMaterial
             color={dimmed ? "#555555" : config.color}
@@ -113,7 +135,7 @@ export function Planet({ config, dimmed, showLabel, frozenPosition, onSelect }: 
           />
         ) : (
           <meshPhysicalMaterial
-            map={surfaceTexture}
+            map={surfaceTexture ?? undefined}
             color={dimmed ? "#555555" : "#ffffff"}
             emissive={config.color}
             emissiveIntensity={dimmed ? 0.08 : hovered ? 0.55 : 0.3}
@@ -173,4 +195,4 @@ export function Planet({ config, dimmed, showLabel, frozenPosition, onSelect }: 
       )}
     </group>
   );
-}
+});

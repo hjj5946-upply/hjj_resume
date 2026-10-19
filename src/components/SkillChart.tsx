@@ -1,64 +1,33 @@
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
-import { CARD_SURFACE_CLASS } from "../lib/ui";
+import { SKILL_FOCUS } from "../data/resume.ts";
 
-const data = [
-  { name: "Backend", value: 90 },
-  { name: "Frontend", value: 45 },
-  { name: "Mobile", value: 50 },
-  { name: "Infra / DevOps", value: 75 },
-];
-
+// 고정된 막대 4개만 그리면 되므로 차트 라이브러리 없이 CSS 막대로 구현한다.
+// (Recharts를 쓰면 메인 번들이 100KB(gzip) 이상 커진다)
 export function SkillChart() {
   return (
-    <div className={`h-56 w-full p-3 text-xs ${CARD_SURFACE_CLASS}`}>
-      <p className="mb-2 text-[11px] font-semibold text-slate-500 dark:text-slate-300">
-        Tech Focus (비중)
-      </p>
-      <ResponsiveContainer width="100%" height={180}>
-        <BarChart
-          data={data}
-          layout="vertical"
-          margin={{ top: 10, right: 10, left: 0, bottom: 5 }}
-        >
-          <XAxis type="number" domain={[0, 100]} hide />
-          <YAxis
-            type="category"
-            dataKey="name"
-            width={80}
-            tick={{ fontSize: 11, fill: "currentColor" }}
-          />
-          <Tooltip
-            cursor={{ fill: "rgba(148, 163, 184, 0.15)" }}
-            contentStyle={{
-              fontSize: 11,
-              backgroundColor: "#F9FAFB",
-              borderColor: "#E5E7EB",
-              color: "#0F172A",
-            }}
-            labelStyle={{
-              color: "#6B7280",
-            }}
-            itemStyle={{
-              color: "#0F172A",
-            }}
-          />
-          <Bar
-            dataKey="value"
-            radius={[0, 4, 4, 0]}
-            // Tailwind의 currentColor를 써서 라이트/다크에 자연스럽게 맞춤
-            fill="currentColor"
-            className="text-slate-400 dark:text-slate-200"
-            barSize={24}
-          />
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
+    <ul className="space-y-3 text-[11px]">
+      {SKILL_FOCUS.map(({ name, value }) => (
+        <li key={name} className="flex items-center gap-3">
+          <span className="w-24 shrink-0 text-right text-slate-600 dark:text-slate-200">
+            {name}
+          </span>
+          <div
+            className="h-6 flex-1 rounded-r bg-slate-200/60 dark:bg-slate-600/40"
+            role="meter"
+            aria-label={name}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={value}
+          >
+            <div
+              className="h-full rounded-r bg-slate-400 dark:bg-slate-200"
+              style={{ width: `${value}%` }}
+            />
+          </div>
+          <span className="w-7 shrink-0 tabular-nums text-slate-500 dark:text-slate-300">
+            {value}
+          </span>
+        </li>
+      ))}
+    </ul>
   );
 }

@@ -6,24 +6,28 @@
     <!-- Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- 첫 페인트 전에 테마 반영 (규칙은 src/lib/theme.ts의 readStoredTheme과 동일하게 유지) -->
     <script>
-      (function() {
-        const stored = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const theme = stored || (prefersDark ? 'dark' : 'light');
-        
-        if (theme === 'dark') {
+      try {
+        if (localStorage.getItem('theme') === 'dark') {
           document.documentElement.classList.add('dark');
         }
-      })();
+      } catch (e) {}
     </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" />
     
     <!-- Title -->
     <title>Hong JeongJun | 홍정준</title>
 
     <!-- Favicon -->
     <!-- https://www.flaticon.com/kr/free-icons/fav 참조 -->
-    <link rel="icon" type="image/x-icon" href="/hjj_resume/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="%BASE_URL%favicon.ico" />
 
     <!-- SEO -->
     <meta name="description" content="Software Developer Hong JeongJun — Portfolio, Skills, Projects and Experience. React, TypeScript, Kotlin, FastAPI." />
