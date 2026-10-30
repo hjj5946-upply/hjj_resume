@@ -22,7 +22,7 @@ export function ScrollToTopButton() {
       type="button"
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="Scroll to top"
-      className="fixed bottom-5 right-4 flex h-10 w-10 items-center justify-center rounded-full border border-accent/60 bg-white/90 text-slate-700 shadow-md backdrop-blur transition hover:-translate-y-0.5 hover:shadow-lg dark:border-accent-light/70 dark:bg-[#383a3d]/90 dark:text-slate-100 md:bottom-7 md:right-8"
+      className="fixed bottom-5 right-4 flex h-10 w-10 items-center justify-center rounded-full border border-accent/60 bg-white/90 text-slate-700 shadow-md backdrop-blur transition hover:-translate-y-0.5 hover:shadow-lg dark:border-accent-light/70 dark:bg-[#383a3d]/90 dark:text-slate-100 md:bottom-7 md:right-8 print:hidden"
     >
       <FiArrowUp className="h-4 w-4" />
     </button>

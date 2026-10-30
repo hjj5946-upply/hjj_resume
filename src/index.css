@@ -3,5 +3,20 @@
 @tailwind utilities;
 
 body {
-    @apply font-sans;
+  @apply font-sans;
+}
+
+/* PDF(인쇄) 출력: A4 기준 여백. 화면의 종이 패딩(14mm/16mm)과 맞춰 화면과 출력물이 같은 모양이 되게 한다. */
+@page {
+  size: A4;
+  margin: 16mm 14mm;
+}
+
+@media print {
+  html,
+  body {
+    background: white;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
+}

@@ -1,63 +1,106 @@
-import { ProjectCard } from "../components/ProjectCard.tsx";
-import { FEATURED_PROJECT_COUNT, PROJECTS } from "../data/resume.ts";
+import { useState } from "react";
+import { FiChevronDown, FiChevronUp, FiExternalLink } from "react-icons/fi";
+import { PROJECTS, WEB_PREVIEW_PROJECT_COUNT, type Project, type ProjectType } from "../data/resume.ts";
+import { toLinkLabel } from "../lib/links.ts";
 import { SectionTitle } from "./SectionTitle.tsx";
 
-const FEATURED_PROJECTS = PROJECTS.slice(0, FEATURED_PROJECT_COUNT);
+const HIDDEN_COUNT = PROJECTS.length - WEB_PREVIEW_PROJECT_COUNT;
 
-type ProjectsSectionProps = { onShowAll: () => void };
+export function ProjectsSection() {
+  const [expanded, setExpanded] = useState(false);
 
-export function ProjectsSection({ onShowAll }: ProjectsSectionProps) {
   return (
     <>
-      <SectionTitle>Projects</SectionTitle>
-      <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
-        최근에 집중해서 만들었던 프로젝트 몇 가지를 정리했습니다.
-      </p>
-
-      <div className="mt-4 grid gap-4 md:grid-cols-2">
-        {FEATURED_PROJECTS.map((project) => (
-          <ProjectCard key={project.id} {...project} />
+      <SectionTitle>프로젝트</SectionTitle>
+      {/* 항목 수가 많아 구분선으로 프로젝트 경계를 확실히 나눈다. */}
+      <div className="divide-y divide-slate-200 dark:divide-slate-700">
+        {PROJECTS.map((project, index) => (
+          // 접힌 상태에서도 PDF에는 전부 나와야 하므로 DOM에서 빼지 않고 화면에서만 숨긴다.
+          <ProjectItem
+            key={project.id}
+            {...project}
+            hiddenOnScreen={!expanded && index >= WEB_PREVIEW_PROJECT_COUNT}
+          />
         ))}
       </div>
 
-      <div className="mt-4 flex justify-end">
+      {HIDDEN_COUNT > 0 && (
         <button
           type="button"
-          onClick={onShowAll}
-          className="text-xs font-medium text-slate-600 underline-offset-4 hover:underline dark:text-slate-200"
+          onClick={() => setExpanded((prev) => !prev)}
+          aria-expanded={expanded}
+          className="mt-4 flex w-full items-center justify-center gap-1 rounded border border-slate-300 py-2 text-[13px] font-medium text-slate-600 transition-colors hover:bg-slate-50 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-700/40 print:hidden"
         >
-          전체 프로젝트 보기 →
+          {expanded ? (
+            <>
+              접기 <FiChevronUp className="h-3.5 w-3.5" />
+            </>
+          ) : (
+            <>
+              프로젝트 {HIDDEN_COUNT}개 더보기 <FiChevronDown className="h-3.5 w-3.5" />
+            </>
+          )}
         </button>
-      </div>
+      )}
     </>
   );
 }
 
-type ProjectsPageProps = { onBack: () => void };
+type ProjectItemProps = Project & { hiddenOnScreen: boolean };
 
-export function ProjectsPage({ onBack }: ProjectsPageProps) {
+// 자사/외주/개인을 색으로도 구분해 목록을 훑을 때 바로 보이게 한다.
+const TYPE_BADGE_CLASS: Record<ProjectType, string> = {
+  자사: "border-slate-800 bg-slate-800 text-white dark:border-slate-200 dark:bg-slate-200 dark:text-slate-900",
+  외주: "border-slate-400 text-slate-600 dark:border-slate-500 dark:text-slate-300",
+  개인: "border-accent text-accent dark:border-accent-light dark:text-accent-light",
+};
+
+function ProjectItem({ name, type, description, techs, achievement, links, hiddenOnScreen }: ProjectItemProps) {
   return (
-    <section className="mb-8">
-      <SectionTitle>All Projects</SectionTitle>
-      <p className="mt-3 text-sm text-slate-700 dark:text-slate-300">
-        자사, 외주·프리랜서 및 개인 프로젝트 중 실제 서비스 기준으로 개발을 완료하고, 인계 또는 운영까지 수행한 프로젝트들을 정리했습니다.
-      </p>
-
-      <div className="mt-4 grid gap-4 md:grid-cols-2">
-        {PROJECTS.map((project) => (
-          <ProjectCard key={project.id} {...project} />
+    <article
+      className={`break-inside-avoid py-3 text-sm first:pt-0 ${hiddenOnScreen ? "hidden print:block" : ""}`}
+    >
+      <h3 className="flex flex-wrap items-center gap-x-2 text-[15px] font-bold text-slate-900 dark:text-slate-50">
+        <span className="border-l-[3px] border-accent pl-2 dark:border-accent-light">{name}</span>
+        <span className={`rounded border px-1.5 py-px text-[11px] font-semibold leading-4 ${TYPE_BADGE_CLASS[type]}`}>
+          {type}
+        </span>
+      </h3>
+      <p className="mt-1.5 leading-relaxed text-slate-700 dark:text-slate-300">{description}</p>
+      {achievement && (
+        <p className="mt-1 font-medium text-slate-900 dark:text-slate-50">
+          <span className="mr-1 text-[13px] font-semibold text-accent dark:text-accent-light">성과</span>
+          {achievement}
+        </p>
+      )}
+      <ul className="mt-1.5 flex flex-wrap gap-1">
+        {techs.map((tech) => (
+          <li
+            key={tech}
+            className="rounded border border-slate-200 px-1.5 py-px text-xs text-slate-600 dark:border-slate-600 dark:text-slate-300"
+          >
+            {tech}
+          </li>
         ))}
-      </div>
-
-      <div className="mt-6 flex justify-end">
-        <button
-          type="button"
-          onClick={onBack}
-          className="text-xs font-medium text-slate-600 underline-offset-4 hover:underline dark:text-slate-200"
-        >
-          메인으로 돌아가기
-        </button>
-      </div>
-    </section>
+      </ul>
+      {links && links.length > 0 && (
+        <ul className="mt-1.5 flex flex-wrap gap-x-4 gap-y-0.5 text-[13px]">
+          {links.map(({ label, url }) => (
+            <li key={url} className="flex items-center gap-1.5">
+              <FiExternalLink className="h-3 w-3 text-slate-400" aria-hidden />
+              <span className="font-semibold text-slate-500 dark:text-slate-400">{label}</span>
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent hover:underline dark:text-accent-light"
+              >
+                {toLinkLabel(url)}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </article>
   );
 }
