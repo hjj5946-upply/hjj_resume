@@ -73,16 +73,18 @@ function ProjectItem({ name, type, description, techs, achievement, links, hidde
           {achievement}
         </p>
       )}
-      <ul className="mt-1.5 flex flex-wrap gap-1">
-        {techs.map((tech) => (
-          <li
-            key={tech}
-            className="rounded border border-slate-200 px-1.5 py-px text-xs text-slate-600 dark:border-slate-600 dark:text-slate-300"
-          >
-            {tech}
-          </li>
-        ))}
-      </ul>
+      {techs.length > 0 && (
+        <ul className="mt-1.5 flex flex-wrap gap-1">
+          {techs.map((tech) => (
+            <li
+              key={tech}
+              className="rounded border border-slate-200 px-1.5 py-px text-xs text-slate-600 dark:border-slate-600 dark:text-slate-300"
+            >
+              {tech}
+            </li>
+          ))}
+        </ul>
+      )}
       {links && links.length > 0 && (
         <ul className="mt-1.5 flex flex-wrap gap-x-4 gap-y-0.5 text-[13px]">
           {links.map(({ label, url }) => (

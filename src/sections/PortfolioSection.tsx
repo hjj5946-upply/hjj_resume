@@ -7,9 +7,9 @@ const LINKS = [
   ...PORTFOLIO_LINKS,
   ...PROJECTS.flatMap((p) =>
     (p.links ?? []).map((link) => ({
-      label: p.name.split(" – ")[0],
+      label: p.portfolioName ?? p.name.split(" – ")[0],
       url: link.url,
-      description: link.label,
+      description: p.portfolioDescription ?? link.label,
     }))
   ),
 ];

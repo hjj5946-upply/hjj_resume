@@ -14,6 +14,10 @@ export type Project = {
   techs: string[];
   achievement?: string;
   links?: ProjectLink[];
+  // 하단 포트폴리오 섹션에 표시할 이름(서비스 브랜드명)과 한 줄 설명.
+  // 없으면 이름은 프로젝트명 앞부분, 설명은 링크 label을 쓴다.
+  portfolioName?: string;
+  portfolioDescription?: string;
 };
 
 // 기간은 "YYYY-MM" 형식. end가 없으면 재직 중으로 보고, 재직 기간·총 경력은 화면에서 자동 계산한다.
@@ -80,6 +84,52 @@ export const WEB_PREVIEW_PROJECT_COUNT = 3;
 
 export const PROJECTS: Project[] = [
   {
+    id: "autofocus",
+    type: "자사",
+    name: "Autofocus – Website Renewal & ERP Platform",
+    description:
+      "레거시 기업 홈페이지를 리뉴얼하고, 정비 관련 시스템의 플랫폼화 도입을 준비하며 전사관리시스템(ERP) 구축을 진행.",
+    techs: [],
+    links: [{ label: "홈페이지", url: "https://autofocushub.com/" }],
+    portfolioName: "Autofocus",
+    portfolioDescription: "정비 플랫폼 및 기업 홈페이지 모더나이제이션",
+  },
+  {
+    id: "bareunireum",
+    type: "외주",
+    name: "BareunIreum – Saju-based Naming Platform",
+    description:
+      "성명학·사주 기반으로 이름을 분석하고 작명·개명을 추천하는 서비스 플랫폼. Next.js 기반 웹 서비스를 구축하고 데이터·인증은 Supabase, 배포와 엣지 네트워크는 Vercel·Cloudflare로 구성하여 운영.",
+    techs: ["React", "Next.js", "Supabase", "Vercel", "Cloudflare"],
+    links: [{ label: "서비스", url: "https://www.bareunireum.com/" }],
+    portfolioName: "바른이름",
+    portfolioDescription: "사주 기반 이름 작명·개명 서비스",
+  },
+  {
+    id: "pickstudy",
+    type: "개인",
+    name: "PickStudy",
+    description:
+      "학원·학생·학부모를 연결하는 통합 관리 플랫폼. 학생용/관리자용 앱과 백엔드를 풀스택으로 설계·구현하고 실시간 위치, 알림, 관리 기능을 포함한 MVP 완성.",
+    techs: ["Kotlin", "Jetpack Compose", "FastAPI", "PostgreSQL", "AWS", "React"],
+    achievement: "학원 3곳, 학생 100+ 명 관리 MVP 완성 및 운영",
+    links: [{ label: "서비스", url: "https://pickstudy.app/" }],
+    portfolioName: "픽스터디",
+    portfolioDescription: "학원 운영 전반을 아우르는 통합 서비스 플랫폼",
+  },
+  {
+    id: "barojajae",
+    type: "외주",
+    name: "BaroJajae – Construction Material Ordering Platform",
+    description:
+      "건설 현장과 자재 공급을 연결하는 자재 발주·주문 관리 플랫폼. 사용자 웹, 관리자 페이지, API 서버부터 인프라·배포까지 SaaS/PaaS 기반으로 1인 설계·개발하여 실서비스로 운영.",
+    techs: ["React", "Python", "PostgreSQL", "Redis", "Supabase", "Fly.io", "Cloudflare"],
+    achievement: "1인 풀스택 개발, 기획·설계부터 배포·운영까지 전 과정 단독 수행",
+    links: [{ label: "서비스", url: "https://barojajae.com/" }],
+    portfolioName: "바로자재",
+    portfolioDescription: "자재 발주 플랫폼 · 회사 소개 랜딩페이지 · 사내 전사관리 시스템",
+  },
+  {
     id: "toel-platform",
     type: "자사",
     name: "TOEL – Overseas Commerce & Logistics Platform",
@@ -88,6 +138,8 @@ export const PROJECTS: Project[] = [
     techs: ["React", "Spring Boot", "JPA", "MySQL", "AWS", "Payment API", "Shipping API"],
     achievement: "월 평균 5,000+ 해외 주문 처리 및 실시간 배송 추적",
     links: [{ label: "서비스", url: "https://btorage.com" }],
+    portfolioName: "Btorage",
+    portfolioDescription: "오픈마켓형 해외 물류 모듈 시스템 · 사내 SCM/WMS 웹 시스템",
   },
   {
     id: "vehicle-service",
@@ -106,15 +158,6 @@ export const PROJECTS: Project[] = [
       "중소·대기업 물류센터에 납품되는 WMS/WCS 솔루션 개발. PAS/DAS/DPS, AGV, 로봇팔 등 자동화 설비 제어와 ERP/SAP 연동을 포함한 물류 코어 시스템.",
     techs: ["C#", "ASP.NET", "MSSQL", "WMS", "WCS", "AGV", "Robot"],
     achievement: "대형 물류센터 5곳 납품, 일 평균 20,000+ 출고 처리",
-  },
-  {
-    id: "pickstudy",
-    type: "개인",
-    name: "PickStudy",
-    description:
-      "학원·학생·학부모를 연결하는 통합 관리 플랫폼. 학생용/관리자용 앱과 백엔드를 풀스택으로 설계·구현하고 실시간 위치, 알림, 관리 기능을 포함한 MVP 완성.",
-    techs: ["Kotlin", "Jetpack Compose", "FastAPI", "PostgreSQL", "AWS", "React"],
-    achievement: "학원 3곳, 학생 100+ 명 관리 MVP 완성 및 운영",
   },
   {
     id: "toel-addon",
@@ -206,6 +249,8 @@ export const PROJECTS: Project[] = [
     techs: ["React", "TypeScript", "Vite", "Tailwind"],
     achievement: "개인 프로젝트, PWA 기반 오프라인 플레이 지원",
     links: [{ label: "서비스", url: "https://jun-gamebox.com" }],
+    portfolioName: "JJangGames",
+    portfolioDescription: "웹 무료 게임 서비스",
   },
   {
     id: "elfin",
@@ -216,16 +261,6 @@ export const PROJECTS: Project[] = [
     techs: ["React", "Responsive Web", "Supabase", "ECS", "SaaS"],
     achievement: "1인 풀스택 개발, 기획부터 배포까지 3개월 완성",
     // links: [{ label: "서비스", url: "https://elfin.co.kr" }],
-  },
-  {
-    id: "account",
-    type: "개인",
-    name: "씀씀이 기록",
-    description:
-      "개인 지출 패턴을 태그와 그래프로 시각화한 PWA 기반 개인 재무 관리 웹 서비스. 오프라인 사용을 지원하며, 카테고리별 분석과 정기 지출 관리 기능을 구현.",
-    techs: ["React", "TypeScript", "PWA", "Data Visualization"],
-    achievement: "개인 프로젝트, PWA + 오프라인 지원 구현",
-    links: [{ label: "웹 앱", url: "https://hjj5946-upply.github.io/actbook/lock" }],
   },
 ];
 
