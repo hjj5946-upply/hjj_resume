@@ -47,11 +47,14 @@ export const PROFILE = {
     "AI를 활용해 실제 사용되는 제품을 빠르게 만드는 개발자입니다. 단순 기능 구현보다 사용자 경험과 실행 속도를 중요하게 생각하며, LLM·자동화·백엔드 시스템을 조합해 아이디어를 서비스로 연결하는 작업에 집중하고 있습니다.",
     "Java(Spring), Python(FastAPI) 기반으로 개발하며, OpenAI API와 다양한 AI 워크플로우를 활용해 서비스 자동화와 생산성 향상을 구현합니다. 백엔드를 중심으로 필요 시 프론트엔드와 모바일까지 직접 개발합니다.",
   ],
-  // 예: "군필 (육군 병장 만기전역, 2014-03 ~ 2015-12)". 비워두면 표시하지 않는다.
-  military: "",
-  // 상단 요약 줄의 "주요 도메인" 칸
-  domain: { value: "물류 · 커머스", detail: "WMS·WCS, 해외 커머스, 상용차 정비" },
 };
+
+// 병역·취업우대사항(보훈·장애 등). 학력 아래 별도 섹션으로 표시하고, 비우면 섹션이 빠진다.
+export const ADDITIONAL_INFO: { label: string; value: string }[] = [
+  { label: "병역", value: "육군 (병장 만기전역, 2013.12 ~ 2015.09)" },
+  { label: "보훈 대상", value: "비대상" },
+  { label: "장애", value: "비대상" },
+];
 
 // PDF로 받은 사람도 최신 웹 버전을 열어볼 수 있도록 이력서에 함께 적는다.
 export const RESUME_URL = "https://hjj5946-upply.github.io/hjj_resume/";
@@ -91,7 +94,7 @@ export const PROJECTS: Project[] = [
     type: "자사",
     name: "Commercial Vehicle Service & Parts System",
     description:
-      "벤츠트럭(BENZ), MAN 트럭 등 상용차 제조사의 직영·대리점 정비센터를 위한 정비·부품·재고 관리 시스템. PDI, 정비 이력, SAP 연동 및 부품 WMS를 포함한 엔터프라이즈 백엔드 구축.",
+      "글로벌 상용차 제조사의 전국 직영·대리점 정비센터를 위한 정비·부품·재고 관리 시스템. PDI, 정비 이력, SAP 연동 및 부품 WMS를 포함한 엔터프라이즈 백엔드 구축.",
     techs: ["Spring Boot", "SAP", "WMS", "PostgreSQL", "Enterprise System"],
     achievement: "전국 20+ 정비센터 운영 중, 일 평균 200+ 정비 건 처리",
   },
@@ -152,19 +155,18 @@ export const PROJECTS: Project[] = [
   {
     id: "assist-korea-wms",
     type: "자사",
-    name: "Assist Korea – WMS Migration",
+    name: "Legacy WMS Migration – In-house Solution",
     description:
-      "노후 외주 WMS를 자체 솔루션으로 전환하여 재고 정확도 및 처리 성능을 개선.",
+      "제조·유통 고객사가 사용하던 노후 외주 WMS를 자사 솔루션으로 전환하여 재고 정확도 및 처리 성능을 개선.",
     techs: ["C#", "ASP.NET", "MSSQL", "WMS"],
     achievement: "재고 정확도 85% → 99% 개선, 처리 속도 2배 향상",
-    links: [{ label: "고객사", url: "http://assist-korea.co.kr/intro.php?userAgent=PC&" }],
   },
   {
     id: "abc-mart",
     type: "자사",
-    name: "ABC Mart – Large-scale WMS/WCS 구축",
+    name: "Large-scale Retail Logistics Center – WMS/WCS",
     description:
-      "대형 물류센터 이전에 맞춰 WMS 재구축 및 PAS·로봇팔 기반 WCS 도입.",
+      "글로벌 패션 리테일 기업의 대형 물류센터 이전에 맞춰 WMS 재구축 및 PAS·로봇팔 기반 WCS 도입.",
     techs: ["C#", "WMS", "WCS", "Robot", "MSSQL", "RabbitMQ", "Docker"],
     achievement: "일 평균 15,000+ 건 처리, 로봇 자동화로 인건비 50% 절감",
   },
@@ -180,7 +182,7 @@ export const PROJECTS: Project[] = [
   {
     id: "jupiter",
     type: "자사",
-    name: "Jupiter – WMS Web Migration",
+    name: "Windows to Web WMS Migration",
     description:
       "레거시 Windows 기반 WMS를 웹 기반으로 재구축하여 유지보수성과 확장성 확보.",
     techs: ["ASP.NET", "MSSQL", "WMS", "RabbitMQ"],
@@ -189,9 +191,9 @@ export const PROJECTS: Project[] = [
   {
     id: "covid-sollog",
     type: "외주",
-    name: "COVID-SOLLOG",
+    name: "Thermal Screening Access Control",
     description:
-      "열화상 카메라 기반 체온 측정 및 출입 관리 태블릿 서비스.",
+      "코로나19 대응을 위한 열화상 카메라 기반 체온 측정 및 출입 관리 태블릿 서비스.",
     techs: ["Python", "React", "MySQL", "Redis"],
     achievement: "1개월 내 프로토타입 → 상용 서비스 론칭",
   },
@@ -208,7 +210,7 @@ export const PROJECTS: Project[] = [
   {
     id: "elfin",
     type: "외주",
-    name: "Elfin – Women's Shopping Mall SaaS",
+    name: "Women's Fashion Mall SaaS",
     description:
       "여성 패션 쇼핑몰을 위한 사용자 웹사이트 및 관리자 페이지를 1인 개발한 SaaS 형태의 서비스. 반응형 UI 기반으로 상품·주문·운영 관리 기능을 구현하고, Supabase를 활용한 데이터 관리 및 ECS 기반 배포 환경 구축.",
     techs: ["React", "Responsive Web", "Supabase", "ECS", "SaaS"],
@@ -272,7 +274,7 @@ export const EXPERIENCES: Experience[] = [
     role: "Backend Engineer",
     org: "Commercial Vehicle Service & Parts System",
     bullets: [
-      "벤츠트럭(BENZ Truck), MAN 트럭 등 상용차 제조사의 직영·대리점 서비스 정비센터를 위한 정비 시스템 구축 및 운영",
+      "글로벌 상용차 제조사(수입 트럭 브랜드)의 직영·대리점 서비스 정비센터를 위한 정비 시스템 구축 및 운영",
       "차량 입고부터 PDI, 정비 이력 관리까지 정비 전 과정을 관리하는 백엔드 시스템 설계·구현",
       "정비 시스템 내 SAP 연동을 통한 부품, 비용, 환율 기반 관리 로직 개발",
       "차량 부품 WMS 시스템 구축 및 재고 흐름 관리 기능 구현",
@@ -293,7 +295,7 @@ export const EXPERIENCES: Experience[] = [
     ],
   },
   {
-    start: "2018-01",
+    start: "2017-06",
     end: "2021-11",
     role: "Web / Backend Engineer",
     org: "WMS/WCS Core Solution",
@@ -309,7 +311,10 @@ export const EXPERIENCES: Experience[] = [
 
 // 최신 학력이 맨 앞. 첫 항목이 상단 요약의 "최종학력"으로 쓰인다.
 // 예: { period: "2011-03 ~ 2017-02", school: "OO대학교", major: "컴퓨터공학과", status: "졸업" }
-export const EDUCATION: Education[] = [{ period: "2019 ~ 2023", school: "광운대학교", status: "졸업" }];
+export const EDUCATION: Education[] = [
+  { period: "2019 ~ 2023", school: "광운대학교", status: "졸업" },
+  { period: "2009 ~ 2012", school: "하남경영고등학교", status: "졸업" },
+];
 
 // 예: { date: "2017-11", name: "정보처리기사", issuer: "한국산업인력공단" }
 export const CERTIFICATIONS: Certification[] = [];

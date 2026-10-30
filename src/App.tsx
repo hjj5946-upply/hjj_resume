@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { Footer } from "./components/Footer.tsx";
 import { Header } from "./components/Header.tsx";
 import { ScrollToTopButton } from "./components/ScrollToTopButton.tsx";
-import { CERTIFICATIONS, EDUCATION, LANGUAGES, PROFILE, TRAININGS } from "./data/resume.ts";
+import { ADDITIONAL_INFO, CERTIFICATIONS, EDUCATION, LANGUAGES, PROFILE, TRAININGS } from "./data/resume.ts";
 import { applyThemeClass, readStoredTheme, storeTheme, type Theme } from "./lib/theme.ts";
+import { AdditionalInfoSection } from "./sections/AdditionalInfoSection.tsx";
 import { CredentialsSection } from "./sections/CredentialsSection.tsx";
 import { EducationSection } from "./sections/EducationSection.tsx";
 import { ExperienceSection } from "./sections/ExperienceSection.tsx";
@@ -84,6 +85,12 @@ function App() {
           {EDUCATION.length > 0 && (
             <section id="education">
               <EducationSection />
+            </section>
+          )}
+
+          {ADDITIONAL_INFO.length > 0 && (
+            <section id="additional-info">
+              <AdditionalInfoSection />
             </section>
           )}
 

@@ -3,7 +3,7 @@ import {
   EDUCATION,
   EXPERIENCES,
   LANGUAGES,
-  PROFILE,
+  PROJECTS,
 } from "../data/resume.ts";
 import { formatDuration, totalCareerMonths } from "../lib/career.ts";
 
@@ -36,7 +36,7 @@ function buildHighlights(): Highlight[] {
       value: firstLanguage.detail,
       detail: firstLanguage.language,
     },
-    { label: "주요 도메인", ...PROFILE.domain },
+    { label: "프로젝트", value: `${PROJECTS.length}건` },
   ];
   return items.filter((item): item is Highlight => Boolean(item));
 }

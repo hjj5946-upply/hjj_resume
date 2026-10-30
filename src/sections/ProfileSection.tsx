@@ -44,12 +44,6 @@ export function ProfileSection() {
               </dd>
             </div>
           ))}
-          {PROFILE.military && (
-            <>
-              <dt className="text-slate-500 dark:text-slate-400">병역</dt>
-              <dd>{PROFILE.military}</dd>
-            </>
-          )}
         </dl>
       </div>
 
