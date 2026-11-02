@@ -119,8 +119,8 @@ export const PROJECTS: Project[] = [
     name: "전사관리시스템(ERP)·기업 홈페이지 리뉴얼",
     period: "2026 ~ 현직",
     description:
-      "레거시 기업 홈페이지를 리뉴얼하고, 문의 접수·영업(Sales) 관리·사내 회계·매출을 다루는 전사관리시스템을 구축해 운영 중(초기 단계, 지속 개선). 서버·인프라 구성과 개발·구축을 담당(기획·디자인 제외).",
-    techs: [],
+      "레거시 기업 홈페이지를 리뉴얼하고, 문의 접수·영업(Sales) 관리·사내 회계·매출을 다루는 전사관리시스템을 구축해 운영 중(초기 단계, 지속 개선). 서버·인프라 구성과 개발·구축을 담당(기획·디자인 제외). SaaS·PaaS 기반으로 빠르게 현대화해 사내 업무와 재무회계 관리의 편의성을 높임.",
+    techs: ["React", "Python", "Supabase", "Railway"],
     links: [{ label: "홈페이지", url: "https://autofocushub.com/" }],
     portfolioName: "Autofocus",
     portfolioDescription: "기업 홈페이지 리뉴얼 · 전사관리시스템(ERP)",
@@ -131,7 +131,7 @@ export const PROJECTS: Project[] = [
     name: "해외 구매·배송대행 플랫폼(TOEL) 구축·운영",
     period: "2022.07 ~ 2025.08",
     description:
-      "성능과 노후 기술, 유지·개선 대응에 한계가 있던 외주 웹 솔루션을 대체해, 구매·배송대행 플랫폼(고객 웹·앱, 관리자 웹)을 자사 기획으로 새로 구축. 2인 팀의 주 담당으로 기획·설계·구현을 총괄. PayPal·위챗 결제와 FedEx·UPS·우체국(EMS) 배송을 연동하고, 금액·무게 계산 자동화와 고객 물류 단계 알림으로 수동 업무와 실수를 줄임. 외부 쇼핑몰용 오픈 API를 제공하고, 판매자 참여 오픈마켓을 오픈해 운영(오픈 이후 월 200~300건 출고 규모). 물류 포털·관리자 대시보드와 고객용 안드로이드 앱(UI/UX·주문·결제 연동)도 담당.",
+      "성능과 노후 기술, 유지·개선 대응에 한계가 있던 외주 웹 솔루션을 대체해, 구매·배송대행 플랫폼(고객 웹·앱, 관리자 웹)을 자사 기획으로 새로 구축. 2인 팀의 주 담당으로 기획·설계·구현을 총괄. PayPal·위챗 결제와 FedEx·UPS·우체국(EMS) 배송을 연동하고, 고객 물류 단계 알림으로 수동 업무와 실수를 줄임. 금액·무게 계산 자동화로 현장 입출고 처리 시간과 인력 비용을 줄이고, 주문→결제 소요 시간을 5초 이상 단축. 신규 시스템 전환 후 신규 고객 유입이 늘어 매출 25% 상승. 외부 쇼핑몰용 오픈 API와 오픈마켓을 운영(월 200~300건 출고). 물류 포털·관리자 대시보드와 고객용 안드로이드 앱(UI/UX·주문·결제 연동)도 담당.",
     techs: ["React", "Spring Boot", "JPA", "MySQL", "AWS", "Redis", "Kafka", "Jenkins"],
     links: [{ label: "서비스", url: "https://btorage.com/" }],
     portfolioName: "Btorage",
@@ -143,7 +143,7 @@ export const PROJECTS: Project[] = [
     name: "레거시 Windows WMS의 웹 전환",
     period: "2019 ~ 2020",
     description:
-      "노후화된 Windows 기반 WMS를 웹 기반으로 전환. 데이터 마이그레이션과 재고·입출고 프로세스 화면 모듈 개발 담당.",
+      "노후화된 Windows 기반 WMS를 웹 기반으로 전환. 약 8천만~1.5억 건 규모의 데이터 마이그레이션과 재고·입출고 프로세스 화면 모듈 개발 담당.",
     techs: ["ASP.NET", "MSSQL", "RabbitMQ"],
   },
   {
@@ -248,7 +248,7 @@ export const SKILL_GROUPS: SkillGroup[] = [
   { label: "Database", items: ["PostgreSQL", "MySQL", "MSSQL", "Redis", "Supabase"] },
   {
     label: "Infra / DevOps",
-    items: ["AWS (EC2/RDS)", "Docker", "Jenkins", "CI/CD", "Vercel", "Cloudflare", "Fly.io"],
+    items: ["AWS (EC2/RDS)", "Docker", "Jenkins", "CI/CD", "Vercel", "Cloudflare", "Fly.io", "Railway"],
   },
   {
     label: "Integration",
