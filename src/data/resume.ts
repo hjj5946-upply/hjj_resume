@@ -1,17 +1,24 @@
 // 이력서 본문 데이터. 화면 컴포넌트와 분리해 내용 수정 시 이 파일만 보면 되도록 한다.
 
-// 자사: 재직 회사의 서비스·솔루션(고객사 납품 포함) / 외주: 외부 의뢰·프리랜서 / 개인: 사이드 프로젝트
+// 자사: 재직 회사의 서비스·솔루션 / 외주: 외부 의뢰·프리랜서 / 개인: 사이드 프로젝트
 export type ProjectType = "자사" | "외주" | "개인";
 
-// label은 링크의 성격(서비스, 고객사, GitHub, 데모 등)을 짧게 적는다.
+// label은 링크의 성격(서비스, 홈페이지, GitHub, 데모 등)을 짧게 적는다.
 export type ProjectLink = { label: string; url: string };
 
 export type Project = {
   id: string;
   name: string;
   type: ProjectType;
+  // 표기용 기간 문자열(예: "2022.07 ~ 2025.08", 진행 중이면 "2025.10 ~" 또는 "2025.10 ~ 현직").
+  period: string;
+  // 기간 뒤에 " · "로 붙는 짧은 상태 표시(예: "오픈 준비 중").
+  status?: string;
+  // 값이 있는 프로젝트 앞에 그룹 소제목을 띄운다(그룹의 첫 프로젝트에만 적는다).
+  group?: string;
   description: string;
   techs: string[];
+  // 성과 줄. 값이 없으면 줄 자체를 렌더링하지 않는다.
   achievement?: string;
   links?: ProjectLink[];
   // 하단 포트폴리오 섹션에 표시할 이름(서비스 브랜드명)과 한 줄 설명.
@@ -46,18 +53,30 @@ export const PROFILE = {
   // 나이는 화면에서 올해 기준으로 자동 계산한다.
   birthYear: 1993,
   title: "Backend Software Engineer",
-  headline: "AI 제품을 빠르게 구현하는 엔지니어, 준입니다.",
+  headline: "AI 에이전트로 제품을 만들고 운영까지 잇는 엔지니어, 준입니다.",
   summary: [
-    "AI를 활용해 실제 사용되는 제품을 빠르게 만드는 개발자입니다. 단순 기능 구현보다 사용자 경험과 실행 속도를 중요하게 생각하며, LLM·자동화·백엔드 시스템을 조합해 아이디어를 서비스로 연결하는 작업에 집중하고 있습니다.",
-    "Java(Spring), Python(FastAPI) 기반으로 개발하며, OpenAI API와 다양한 AI 워크플로우를 활용해 서비스 자동화와 생산성 향상을 구현합니다. 백엔드를 중심으로 필요 시 프론트엔드와 모바일까지 직접 개발합니다.",
+    "예전에는 개발 속도가 코드를 치는 속도였다면, 지금은 AI에게 무엇을 어떻게 시키고 결과를 얼마나 정확히 검증하느냐가 속도를 결정한다고 생각합니다. 저는 AI 에이전트와 MCP로 개발 하네스를 구조화해, 저장소 분석부터 구현·테스트·수정까지 반복하며 랜딩 페이지, 웹, 모바일 앱, 사내 관리 시스템을 1인으로 만들어 운영 단계까지 연결해 왔습니다.",
+    "빠르게 만든 제품에서 놓치기 쉬운 보안의 빈틈도 함께 보완합니다. 9년의 백엔드·운영 경험이 있어 AI가 만든 결과의 구조와 품질을 직접 판단할 수 있고, 다양한 AI 도구를 업무에 적용하며 일하는 방식을 계속 개선하고 있습니다.",
   ],
+};
+
+// 개인정보 노출 설정. 항목별로 true/false만 바꾸면 웹 화면과 PDF에 함께 반영된다.
+export const PRIVACY = {
+  showPhoto: true, // 프로필 사진
+  showAge: true, // 이름 옆 나이
+  showLinkedIn: true, // 상단 연락처와 하단 아이콘의 LinkedIn
+  showVeteranDisability: true, // 병역·취업우대사항의 보훈 대상·장애 줄
 };
 
 // 병역·취업우대사항(보훈·장애 등). 학력 아래 별도 섹션으로 표시하고, 비우면 섹션이 빠진다.
 export const ADDITIONAL_INFO: { label: string; value: string }[] = [
   { label: "병역", value: "육군 (병장 만기전역, 2013.12 ~ 2015.09)" },
-  { label: "보훈 대상", value: "비대상" },
-  { label: "장애", value: "비대상" },
+  ...(PRIVACY.showVeteranDisability
+    ? [
+        { label: "보훈 대상", value: "비대상" },
+        { label: "장애", value: "비대상" },
+      ]
+    : []),
 ];
 
 // PDF로 받은 사람도 최신 웹 버전을 열어볼 수 있도록 이력서에 함께 적는다.
@@ -83,223 +102,157 @@ export const SOCIAL_LINKS = {
 export const WEB_PREVIEW_PROJECT_COUNT = 3;
 
 export const PROJECTS: Project[] = [
+  // ── 그룹 A. 주요 프로젝트 ──
+  {
+    id: "vehicle-service",
+    group: "주요 프로젝트",
+    type: "자사",
+    name: "상용차 정비·부품 관리 시스템 운영·확장",
+    period: "2025.10 ~ 현직",
+    description:
+      "글로벌 상용차 제조사의 직영·대리점 정비센터와 본사가 사용하는 정비·부품·재고 관리 시스템에 합류해 운영·확장. 센터와 본사의 요청에 따른 추가 개발과 유지보수, 정비·금액(회계) 데이터의 SAP 연동 로직 개발, 데이터 확인 업무를 담당.",
+    techs: ["Spring Boot", "SAP", "WMS", "PostgreSQL"],
+  },
   {
     id: "autofocus",
     type: "자사",
-    name: "Autofocus – Website Renewal & ERP Platform",
+    name: "전사관리시스템(ERP)·기업 홈페이지 리뉴얼",
+    period: "2026 ~ 현직",
     description:
-      "레거시 기업 홈페이지를 리뉴얼하고, 정비 관련 시스템의 플랫폼화 도입을 준비하며 전사관리시스템(ERP) 구축을 진행.",
+      "레거시 기업 홈페이지를 리뉴얼하고, 문의 접수·영업(Sales) 관리·사내 회계·매출을 다루는 전사관리시스템을 구축해 운영 중(초기 단계, 지속 개선). 서버·인프라 구성과 개발·구축을 담당(기획·디자인 제외).",
     techs: [],
     links: [{ label: "홈페이지", url: "https://autofocushub.com/" }],
     portfolioName: "Autofocus",
-    portfolioDescription: "정비 플랫폼 및 기업 홈페이지 모더나이제이션",
-  },
-  {
-    id: "bareunireum",
-    type: "외주",
-    name: "BareunIreum – Saju-based Naming Platform",
-    description:
-      "성명학·사주 기반으로 이름을 분석하고 작명·개명을 추천하는 서비스 플랫폼. Next.js 기반 웹 서비스를 구축하고 데이터·인증은 Supabase, 배포와 엣지 네트워크는 Vercel·Cloudflare로 구성하여 운영.",
-    techs: ["React", "Next.js", "Supabase", "Vercel", "Cloudflare"],
-    links: [{ label: "서비스", url: "https://www.bareunireum.com/" }],
-    portfolioName: "바른이름",
-    portfolioDescription: "사주 기반 이름 작명·개명 서비스",
-  },
-  {
-    id: "pickstudy",
-    type: "개인",
-    name: "PickStudy",
-    description:
-      "학원·학생·학부모를 연결하는 통합 관리 플랫폼. 학생용/관리자용 앱과 백엔드를 풀스택으로 설계·구현하고 실시간 위치, 알림, 관리 기능을 포함한 MVP 완성.",
-    techs: ["Kotlin", "Jetpack Compose", "FastAPI", "PostgreSQL", "AWS", "React"],
-    achievement: "학원 3곳, 학생 100+ 명 관리 MVP 완성 및 운영",
-    links: [{ label: "서비스", url: "https://pickstudy.app/" }],
-    portfolioName: "픽스터디",
-    portfolioDescription: "학원 운영 전반을 아우르는 통합 서비스 플랫폼",
-  },
-  {
-    id: "barojajae",
-    type: "외주",
-    name: "BaroJajae – Construction Material Ordering Platform",
-    description:
-      "건설 현장과 자재 공급을 연결하는 자재 발주·주문 관리 플랫폼. 사용자 웹, 관리자 페이지, API 서버부터 인프라·배포까지 SaaS/PaaS 기반으로 1인 설계·개발하여 실서비스로 운영.",
-    techs: ["React", "Python", "PostgreSQL", "Redis", "Supabase", "Fly.io", "Cloudflare"],
-    achievement: "1인 풀스택 개발, 기획·설계부터 배포·운영까지 전 과정 단독 수행",
-    links: [{ label: "서비스", url: "https://barojajae.com/" }],
-    portfolioName: "바로자재",
-    portfolioDescription: "자재 발주 플랫폼 · 회사 소개 랜딩페이지 · 사내 전사관리 시스템",
+    portfolioDescription: "기업 홈페이지 리뉴얼 · 전사관리시스템(ERP)",
   },
   {
     id: "toel-platform",
     type: "자사",
-    name: "TOEL – Overseas Commerce & Logistics Platform",
+    name: "해외 구매·배송대행 플랫폼(TOEL) 구축·운영",
+    period: "2022.07 ~ 2025.08",
     description:
-      "해외 구매대행·배송대행·역구매대행 서비스를 제공하는 커머스/물류 플랫폼을 제로베이스에서 설계·구축. 해외결제, 배송사 API 연동과 자체 물류 프로세스를 포함한 엔드투엔드 시스템.",
-    techs: ["React", "Spring Boot", "JPA", "MySQL", "AWS", "Payment API", "Shipping API"],
-    achievement: "월 평균 5,000+ 해외 주문 처리 및 실시간 배송 추적",
-    links: [{ label: "서비스", url: "https://btorage.com" }],
+      "성능과 노후 기술, 유지·개선 대응에 한계가 있던 외주 웹 솔루션을 대체해, 구매·배송대행 플랫폼(고객 웹·앱, 관리자 웹)을 자사 기획으로 새로 구축. 2인 팀의 주 담당으로 기획·설계·구현을 총괄. PayPal·위챗 결제와 FedEx·UPS·우체국(EMS) 배송을 연동하고, 금액·무게 계산 자동화와 고객 물류 단계 알림으로 수동 업무와 실수를 줄임. 외부 쇼핑몰용 오픈 API를 제공하고, 판매자 참여 오픈마켓을 오픈해 운영(오픈 이후 월 200~300건 출고 규모). 물류 포털·관리자 대시보드와 고객용 안드로이드 앱(UI/UX·주문·결제 연동)도 담당.",
+    techs: ["React", "Spring Boot", "JPA", "MySQL", "AWS", "Redis", "Kafka", "Jenkins"],
+    links: [{ label: "서비스", url: "https://btorage.com/" }],
     portfolioName: "Btorage",
-    portfolioDescription: "오픈마켓형 해외 물류 모듈 시스템 · 사내 SCM/WMS 웹 시스템",
+    portfolioDescription: "해외 구매·배송대행 플랫폼",
   },
   {
-    id: "vehicle-service",
+    id: "wms-web-migration",
     type: "자사",
-    name: "Commercial Vehicle Service & Parts System",
+    name: "레거시 Windows WMS의 웹 전환",
+    period: "2019 ~ 2020",
     description:
-      "글로벌 상용차 제조사의 전국 직영·대리점 정비센터를 위한 정비·부품·재고 관리 시스템. PDI, 정비 이력, SAP 연동 및 부품 WMS를 포함한 엔터프라이즈 백엔드 구축.",
-    techs: ["Spring Boot", "SAP", "WMS", "PostgreSQL", "Enterprise System"],
-    achievement: "전국 20+ 정비센터 운영 중, 일 평균 200+ 정비 건 처리",
+      "노후화된 Windows 기반 WMS를 웹 기반으로 전환. 데이터 마이그레이션과 재고·입출고 프로세스 화면 모듈 개발 담당.",
+    techs: ["ASP.NET", "MSSQL", "RabbitMQ"],
   },
   {
-    id: "wms-wcs-automation",
+    id: "wms-das",
     type: "자사",
-    name: "WMS/WCS Automation Solution",
+    name: "대형 물류센터 WMS 유지관리·DAS 추가 구축",
+    period: "2021",
     description:
-      "중소·대기업 물류센터에 납품되는 WMS/WCS 솔루션 개발. PAS/DAS/DPS, AGV, 로봇팔 등 자동화 설비 제어와 ERP/SAP 연동을 포함한 물류 코어 시스템.",
-    techs: ["C#", "ASP.NET", "MSSQL", "WMS", "WCS", "AGV", "Robot"],
-    achievement: "대형 물류센터 5곳 납품, 일 평균 20,000+ 출고 처리",
+      "운영 중인 대형 3PL 물류센터에서 WMS 유지관리, DAS 추가 구축·관리, AGV·PAS 설비 유지관리 담당.",
+    techs: ["C#", "WMS", "WCS", "MSSQL"],
   },
   {
-    id: "toel-addon",
+    id: "2pl-3pl",
     type: "자사",
-    name: "TOEL-ADDON – Inventory Automation",
+    name: "다중 화주사 WMS 확장 (2PL → 3PL)",
+    period: "2020",
     description:
-      "TOEL 솔루션에 현장 프로세스 기반 재고 관리 및 자동화 기능을 추가하여 운영 효율을 개선.",
-    techs: ["React", "Spring Boot", "MySQL", "AWS", "WMS"],
-    achievement: "재고 처리 시간 40% 단축, 실시간 재고 정확도 98% 달성",
+      "30곳 이상의 화주사가 이용하는 WMS를 3PL 운영에 맞춰 확장 개발. 확장 후 화주사 수가 더 늘어난 시스템.",
+    techs: ["ASP.NET", "MSSQL"],
   },
   {
-    id: "toel2",
+    id: "thermal-attendance",
     type: "자사",
-    name: "TOEL2 – Payment & Shipping API Integration",
+    name: "열화상 체온·출석 관리 시스템",
+    period: "2020",
     description:
-      "PayPal·Stripe 및 DHL·USPS 등 해외결제/배송사 API를 통합하여 결제·배송 자동화와 실시간 추적 기능 고도화.",
-    techs: ["Spring Boot", "Payment API", "Shipping API", "AWS", "Redis", "Kafka", "Jenkins"],
-    achievement: "5개 결제사, 7개 배송사 API 연동 및 자동화",
-  },
-  {
-    id: "toel3",
-    type: "자사",
-    name: "TOEL3 – Open Market Platform",
-    description:
-      "기존 구매대행 솔루션을 확장한 오픈마켓 플랫폼 MVP. 판매자·상품·정산 구조 설계 및 핵심 기능 구현.",
-    techs: ["React", "Spring Boot", "MySQL", "AWS", "Redis", "Kafka", "Jenkins"],
-    achievement: "판매자 30+, 상품 1,000+ 등록 가능한 MVP 구축",
-  },
-  {
-    id: "logistics-dashboard",
-    type: "자사",
-    name: "Logistics Portal & SCM Dashboard",
-    description:
-      "주문·배송·재고 데이터를 통합 조회하는 물류 포털 및 SCM 대시보드 구축.",
-    techs: ["React", "Spring Boot", "Dashboard", "SCM"],
-    achievement: "3개 시스템 데이터 실시간 통합, 운영 효율 30% 개선",
-  },
-  {
-    id: "assist-korea-wms",
-    type: "자사",
-    name: "Legacy WMS Migration – In-house Solution",
-    description:
-      "제조·유통 고객사가 사용하던 노후 외주 WMS를 자사 솔루션으로 전환하여 재고 정확도 및 처리 성능을 개선.",
-    techs: ["C#", "ASP.NET", "MSSQL", "WMS"],
-    achievement: "재고 정확도 85% → 99% 개선, 처리 속도 2배 향상",
-  },
-  {
-    id: "abc-mart",
-    type: "자사",
-    name: "Large-scale Retail Logistics Center – WMS/WCS",
-    description:
-      "글로벌 패션 리테일 기업의 대형 물류센터 이전에 맞춰 WMS 재구축 및 PAS·로봇팔 기반 WCS 도입.",
-    techs: ["C#", "WMS", "WCS", "Robot", "MSSQL", "RabbitMQ", "Docker"],
-    achievement: "일 평균 15,000+ 건 처리, 로봇 자동화로 인건비 50% 절감",
-  },
-  {
-    id: "2p3p",
-    type: "자사",
-    name: "2PL → 3PL Logistics Transformation",
-    description:
-      "다중 화주사 대응을 위한 3PL 물류 시스템 확장 및 프로세스 파라미터화.",
-    techs: ["ASP.NET", "MSSQL", "3PL", "ERP"],
-    achievement: "단일 화주 → 10개 화주사 동시 운영 가능한 시스템 전환",
-  },
-  {
-    id: "jupiter",
-    type: "자사",
-    name: "Windows to Web WMS Migration",
-    description:
-      "레거시 Windows 기반 WMS를 웹 기반으로 재구축하여 유지보수성과 확장성 확보.",
-    techs: ["ASP.NET", "MSSQL", "WMS", "RabbitMQ"],
-    achievement: "Windows 클라이언트 → 웹 마이그레이션, 유지보수 비용 60% 절감",
-  },
-  {
-    id: "covid-sollog",
-    type: "외주",
-    name: "Thermal Screening Access Control",
-    description:
-      "코로나19 대응을 위한 열화상 카메라 기반 체온 측정 및 출입 관리 태블릿 서비스.",
+      "얼굴 인식 체온 측정·출석 데이터를 수신해 관리하고 알림을 제공하는 시스템. 전국 일부 스터디카페에서 사용.",
     techs: ["Python", "React", "MySQL", "Redis"],
-    achievement: "1개월 내 프로토타입 → 상용 서비스 론칭",
+  },
+
+  // ── 그룹 B. 외주·개인 프로젝트 ──
+  {
+    id: "fashion-mall",
+    group: "외주·개인 프로젝트",
+    type: "외주",
+    name: "여성 패션몰 구축",
+    period: "2018",
+    description: "카페24 기반 여성 패션 쇼핑몰의 쇼핑몰 사이트, 관리자 페이지, 결제 연동을 1인 구현.",
+    techs: ["Cafe24", "React", "Java", "Spring Boot", "Git"],
+  },
+  {
+    id: "barojajae",
+    type: "외주",
+    name: "건설 자재 발주 플랫폼",
+    period: "2025.10 ~ 2026.05",
+    status: "오픈 준비 중",
+    description:
+      "의뢰 회사를 위해 랜딩 페이지, 플랫폼 웹, 사내 관리 시스템, 발주·결제 모듈과 프로세스를 1인 총괄 개발. 오픈 준비 중.",
+    techs: ["React", "Python", "PostgreSQL", "Redis", "Supabase", "Fly.io", "Cloudflare"],
+    links: [{ label: "서비스", url: "https://barojajae.com/" }],
+    portfolioName: "바로자재",
+    portfolioDescription: "건설 자재 발주 플랫폼 · 랜딩 페이지 · 사내 관리 시스템",
+  },
+  {
+    id: "bareunireum",
+    type: "개인",
+    name: "사주·성명학 기반 작명 서비스",
+    period: "2026",
+    description: "사주·성명학 기반으로 신생아 작명·개명을 추천하는 서비스를 직접 기획·개발해 운영.",
+    techs: ["React", "Next.js", "Supabase", "Vercel", "Cloudflare"],
+    links: [{ label: "서비스", url: "https://www.bareunireum.com/" }],
+    portfolioName: "바른이름",
+    portfolioDescription: "사주·성명학 기반 작명·개명 서비스",
+  },
+  {
+    id: "pickstudy",
+    type: "개인",
+    name: "학원 통합 관리 플랫폼",
+    period: "2026.01 ~",
+    status: "오픈 준비 중",
+    description:
+      "학원·학생·학부모를 연결하는 통합 관리 플랫폼. 학생용·관리자용 앱과 백엔드를 1인 설계·구현. 웹은 공개, 앱은 배포 준비 중.",
+    techs: ["Flutter(Dart)", "FastAPI", "PostgreSQL", "AWS", "React"],
+    links: [{ label: "서비스", url: "https://pickstudy.app/" }],
+    portfolioName: "픽스터디",
+    portfolioDescription: "학원·학생·학부모 통합 관리 플랫폼",
   },
   {
     id: "jgamebox",
     type: "개인",
-    name: "J GameBox",
-    description:
-      "웹 기반 미니 게임 포털 서비스. 간단한 게임을 빠르게 즐길 수 있는 PWA 스타일 플랫폼.",
+    name: "웹 게임 포털(J GameBox)",
+    period: "2025 ~",
+    description: "간단한 무료 웹 게임 사이트. PWA 기반으로 구성해 운영 중(소규모).",
     techs: ["React", "TypeScript", "Vite", "Tailwind"],
-    achievement: "개인 프로젝트, PWA 기반 오프라인 플레이 지원",
-    links: [{ label: "서비스", url: "https://jun-gamebox.com" }],
-    portfolioName: "JJangGames",
-    portfolioDescription: "웹 무료 게임 서비스",
-  },
-  {
-    id: "elfin",
-    type: "외주",
-    name: "Women's Fashion Mall SaaS",
-    description:
-      "여성 패션 쇼핑몰을 위한 사용자 웹사이트 및 관리자 페이지를 1인 개발한 SaaS 형태의 서비스. 반응형 UI 기반으로 상품·주문·운영 관리 기능을 구현하고, Supabase를 활용한 데이터 관리 및 ECS 기반 배포 환경 구축.",
-    techs: ["React", "Responsive Web", "Supabase", "ECS", "SaaS"],
-    achievement: "1인 풀스택 개발, 기획부터 배포까지 3개월 완성",
-    // links: [{ label: "서비스", url: "https://elfin.co.kr" }],
+    links: [{ label: "서비스", url: "https://jun-gamebox.com/" }],
+    portfolioName: "J GameBox",
+    portfolioDescription: "무료 웹 게임 사이트",
   },
 ];
+
+// 프로젝트 섹션 맨 끝에 붙는 안내 문구. 비우면 렌더링하지 않는다.
+export const PROJECTS_NOTE =
+  "※ 사내·관리자·납품형 시스템은 보안상 URL을 공개하지 않으며, 면접에서 구조와 담당 범위를 설명드릴 수 있습니다.";
 
 export const SKILL_GROUPS: SkillGroup[] = [
   {
     label: "Backend / API",
-    items: [
-      "Java (Spring Boot)",
-      "Python (FastAPI)",
-      "C# (ASP.NET)",
-      // "RabbitMQ",
-      "Kafka",
-    ],
+    items: ["Java (Spring Boot, JPA)", "Python (FastAPI)", "C# (ASP.NET)", "Kafka", "RabbitMQ"],
   },
-  {
-    label: "Frontend / UI",
-    items: [
-      "React",
-      "TypeScript",
-      // "Vite",
-      // "Tailwind CSS",
-      "GSAP",
-    ],
-  },
-  { label: "Mobile", items: ["Android (Flutter(Dart))"] },
+  { label: "Frontend / UI", items: ["React", "Next.js", "TypeScript"] },
+  { label: "Mobile", items: ["Flutter (Dart)", "Android"] },
+  { label: "Database", items: ["PostgreSQL", "MySQL", "MSSQL", "Redis", "Supabase"] },
   {
     label: "Infra / DevOps",
-    items: ["AWS (EC2/RDS)", "Docker", "Jenkins", "CI/CD", "Vercel", "Firebase"],
+    items: ["AWS (EC2/RDS)", "Docker", "Jenkins", "CI/CD", "Vercel", "Cloudflare", "Fly.io"],
   },
   {
-    label: "Data / Storage",
-    items: [
-      "PostgreSQL",
-      "MySQL",
-      // "MSSQL",
-      // "MariaDB",
-      "Redis",
-      "Supabase",
-    ],
+    label: "Integration",
+    items: ["SAP 연동", "WMS·WCS", "결제·배송사 API (PayPal, 위챗, FedEx, UPS, 우체국)"],
   },
 ];
 
@@ -309,11 +262,10 @@ export const EXPERIENCES: Experience[] = [
     role: "Backend Engineer",
     org: "Commercial Vehicle Service & Parts System",
     bullets: [
-      "글로벌 상용차 제조사(수입 트럭 브랜드)의 직영·대리점 서비스 정비센터를 위한 정비 시스템 구축 및 운영",
-      "차량 입고부터 PDI, 정비 이력 관리까지 정비 전 과정을 관리하는 백엔드 시스템 설계·구현",
-      "정비 시스템 내 SAP 연동을 통한 부품, 비용, 환율 기반 관리 로직 개발",
-      "차량 부품 WMS 시스템 구축 및 재고 흐름 관리 기능 구현",
-      "운영 중인 상용 시스템의 유지보수 및 안정화 작업 수행",
+      "글로벌 상용차 제조사의 직영·대리점 정비센터와 본사가 사용하는 정비·부품·재고 관리 시스템에 합류해 운영·확장",
+      "센터·본사 요청에 따른 추가 개발 및 유지보수",
+      "정비·금액(회계) 데이터의 SAP 연동 로직 개발, 부품 WMS 재고 흐름 기능 개발",
+      "전사관리시스템(ERP)·기업 홈페이지 리뉴얼의 서버·인프라 구성, 개발, 구축 담당(기획·디자인 제외)",
     ],
   },
   {
@@ -322,11 +274,11 @@ export const EXPERIENCES: Experience[] = [
     role: "Backend Engineer / Full-Stack Engineer",
     org: "Overseas Commerce & Logistics Platform",
     bullets: [
-      "해외 구매대행·배송대행·역구매대행 서비스를 제공하는 커머스/물류 플랫폼을 백지 상태에서 설계·구축",
-      "해외 결제 API, 배송사 API 연동을 포함한 주문·결제·배송 전체 흐름의 백엔드 시스템 개발",
-      "외부 쇼핑몰이 자사 API 버튼을 통해 구매대행 및 장바구니 기능을 사용할 수 있는 연동 구조 설계",
-      "내부 운영을 위한 경량 WMS 형태의 재고 관리 시스템 구축 및 운영",
-      "안드로이드 앱 개발에 직접 참여하여 서비스 기능 구현 및 운영 지원",
+      "해외 구매대행·배송대행·역구매대행 플랫폼(고객 웹·앱, 관리자 웹)을 2인 팀의 주 담당으로 기획·설계·구현 총괄",
+      "해외 결제(PayPal·위챗)와 배송사(FedEx·UPS·우체국 EMS) 연동, 주문·결제·배송 전 흐름의 백엔드 개발",
+      "금액·무게 계산 자동화와 고객 물류 단계 알림 구현",
+      "외부 쇼핑몰용 오픈 API 제공, 판매자 참여 오픈마켓 오픈·운영",
+      "물류 포털·관리자 대시보드, 내부 운영용 경량 WMS 형태 재고 관리 시스템, 고객용 안드로이드 앱 개발",
     ],
   },
   {
@@ -335,11 +287,11 @@ export const EXPERIENCES: Experience[] = [
     role: "Web / Backend Engineer",
     org: "WMS/WCS Core Solution",
     bullets: [
-      "중소·대기업 및 화주사 물류센터에 납품되는 WMS 솔루션 설계·개발 및 유지보수",
-      "PAS/DAS/DPS 등 WCS 피킹·분배 시스템 구현 및 설비 제어 로직 개발, 현장 연동 및 안정화",
-      "AGV, 로봇팔 등 자동화 설비와 연계된 물류 프로세스 구축 및 운영 지원",
-      "ERP·SAP 등 외부 시스템과의 데이터 연동 및 인터페이스 개발",
-      "내부 SCM 물류 포털 및 MES 시스템 개발·운영",
+      "대형 3PL 물류센터 고객사에 납품·운영되는 WMS 솔루션의 설계·개발 및 유지보수",
+      "노후 Windows WMS의 웹 전환(데이터 마이그레이션, 재고·입출고 화면 모듈), 30곳 이상 화주사를 위한 3PL 확장 개발",
+      "운영 중인 센터의 WMS 유지관리, DAS 추가 구축·관리, AGV·PAS 설비 유지관리",
+      "ERP·SAP 등 외부 시스템과의 데이터 연동·인터페이스 개발",
+      "물류센터와 자사가 쓰던 SCM 물류 포털·MES 웹 프로그램의 화면 구성·개발·배포 담당(서버 구성 제외)",
     ],
   },
 ];

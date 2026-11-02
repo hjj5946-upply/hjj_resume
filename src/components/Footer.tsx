@@ -1,5 +1,5 @@
 import { FiGithub, FiInstagram, FiLinkedin } from "react-icons/fi";
-import { SOCIAL_LINKS } from "../data/resume.ts";
+import { PRIVACY, SOCIAL_LINKS } from "../data/resume.ts";
 
 const ICON_LINK_CLASS =
   "transition-colors duration-300 ease-out hover:text-accent dark:hover:text-accent-light";
@@ -19,15 +19,17 @@ export function Footer() {
         >
           <FiGithub />
         </a>
-        <a
-          href={SOCIAL_LINKS.linkedin}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="LinkedIn"
-          className={ICON_LINK_CLASS}
-        >
-          <FiLinkedin />
-        </a>
+        {PRIVACY.showLinkedIn && (
+          <a
+            href={SOCIAL_LINKS.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className={ICON_LINK_CLASS}
+          >
+            <FiLinkedin />
+          </a>
+        )}
         <a
           href={SOCIAL_LINKS.instagram}
           target="_blank"

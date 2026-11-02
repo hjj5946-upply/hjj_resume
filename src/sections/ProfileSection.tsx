@@ -1,7 +1,9 @@
-import { CONTACT_EMAIL, PROFILE, SOCIAL_LINKS } from "../data/resume.ts";
+import { CONTACT_EMAIL, PRIVACY, PROFILE, SOCIAL_LINKS } from "../data/resume.ts";
 import { toLinkLabel } from "../lib/links.ts";
 
-const PROFILE_BASE = `${import.meta.env.BASE_URL}profile_img`;
+// 프로필 사진 교체: 쓸 줄 하나만 주석을 풀고 나머지는 주석 처리한다 (public/ 폴더의 webp 파일).
+// const PROFILE_IMG = `${import.meta.env.BASE_URL}profile_img.webp`;
+const PROFILE_IMG = `${import.meta.env.BASE_URL}profile_img_2.webp`;
 
 // 생월 없이 연도만 있으므로 올해 연도 - 출생 연도로 계산한다 (해가 바뀌면 자동으로 +1).
 const AGE = new Date().getFullYear() - PROFILE.birthYear;
@@ -9,7 +11,7 @@ const AGE = new Date().getFullYear() - PROFILE.birthYear;
 // 웹 이력서 등 나머지 링크는 하단 포트폴리오 섹션에 모아둔다.
 const LINKS = [
   { label: "GitHub", href: SOCIAL_LINKS.github },
-  { label: "LinkedIn", href: SOCIAL_LINKS.linkedin },
+  ...(PRIVACY.showLinkedIn ? [{ label: "LinkedIn", href: SOCIAL_LINKS.linkedin }] : []),
 ];
 
 export function ProfileSection() {
@@ -21,9 +23,11 @@ export function ProfileSection() {
           <span className="ml-2 align-middle font-inter text-base font-semibold text-slate-500 dark:text-slate-400">
             {PROFILE.nameEn}
           </span>
-          <span className="ml-2 align-middle text-sm font-medium text-slate-500 dark:text-slate-400">
-            {AGE} Age
-          </span>
+          {PRIVACY.showAge && (
+            <span className="ml-2 align-middle text-sm font-medium text-slate-500 dark:text-slate-400">
+              {AGE} Age
+            </span>
+          )}
         </h1>
         <p className="mt-1 text-[15px] font-medium text-accent dark:text-accent-light">{PROFILE.title}</p>
 
@@ -48,22 +52,23 @@ export function ProfileSection() {
       </div>
 
       {/* 증명사진 비율(3:4) */}
-      <div className="w-24 shrink-0 overflow-hidden rounded border border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-700 sm:w-28">
-        <picture>
-          <source srcSet={`${PROFILE_BASE}.webp`} type="image/webp" />
-          <img
-            src={`${PROFILE_BASE}.jpg`}
-            alt="실제 증명사진 기반 AI 생성 프로필 이미지"
-            width={480}
-            height={640}
-            decoding="async"
-            fetchPriority="high"
-            className="aspect-[3/4] w-full object-cover object-[center_20%]"
-            onContextMenu={(e) => e.preventDefault()}
-            onDragStart={(e) => e.preventDefault()}
-          />
-        </picture>
-      </div>
+      {PRIVACY.showPhoto && (
+        <div className="w-24 shrink-0 overflow-hidden rounded border border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-700 sm:w-28">
+          <picture>
+            <img
+              src={PROFILE_IMG}
+              alt="실제 증명사진 기반 AI 생성 프로필 이미지"
+              width={480}
+              height={640}
+              decoding="async"
+              fetchPriority="high"
+              className="aspect-[3/4] w-full object-cover object-[center_20%]"
+              onContextMenu={(e) => e.preventDefault()}
+              onDragStart={(e) => e.preventDefault()}
+            />
+          </picture>
+        </div>
+      )}
     </header>
   );
 }

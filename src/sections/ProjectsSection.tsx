@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FiChevronDown, FiChevronUp, FiExternalLink } from "react-icons/fi";
-import { PROJECTS, WEB_PREVIEW_PROJECT_COUNT, type Project, type ProjectType } from "../data/resume.ts";
+import { PROJECTS, PROJECTS_NOTE, WEB_PREVIEW_PROJECT_COUNT, type Project, type ProjectType } from "../data/resume.ts";
 import { toLinkLabel } from "../lib/links.ts";
 import { SectionTitle } from "./SectionTitle.tsx";
 
@@ -23,6 +23,10 @@ export function ProjectsSection() {
           />
         ))}
       </div>
+
+      {PROJECTS_NOTE && (
+        <p className="mt-3 text-[13px] text-slate-500 dark:text-slate-400">{PROJECTS_NOTE}</p>
+      )}
 
       {HIDDEN_COUNT > 0 && (
         <button
@@ -55,15 +59,22 @@ const TYPE_BADGE_CLASS: Record<ProjectType, string> = {
   개인: "border-accent text-accent dark:border-accent-light dark:text-accent-light",
 };
 
-function ProjectItem({ name, type, description, techs, achievement, links, hiddenOnScreen }: ProjectItemProps) {
+function ProjectItem({ name, type, period, status, group, description, techs, achievement, links, hiddenOnScreen }: ProjectItemProps) {
   return (
     <article
       className={`break-inside-avoid py-3 text-sm first:pt-0 ${hiddenOnScreen ? "hidden print:block" : ""}`}
     >
+      {group && (
+        <p className="mb-2 text-[13px] font-semibold text-slate-500 dark:text-slate-400">{group}</p>
+      )}
       <h3 className="flex flex-wrap items-center gap-x-2 text-[15px] font-bold text-slate-900 dark:text-slate-50">
         <span className="border-l-[3px] border-accent pl-2 dark:border-accent-light">{name}</span>
         <span className={`rounded border px-1.5 py-px text-[11px] font-semibold leading-4 ${TYPE_BADGE_CLASS[type]}`}>
           {type}
+        </span>
+        <span className="text-[13px] font-medium text-slate-500 dark:text-slate-400">
+          {period}
+          {status && ` · ${status}`}
         </span>
       </h3>
       <p className="mt-1.5 leading-relaxed text-slate-700 dark:text-slate-300">{description}</p>
